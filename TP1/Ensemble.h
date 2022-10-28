@@ -6,6 +6,12 @@
 // L'implementation correspond à un ensemble mathématique
 // Les élements sont sauvergadés de manière strictement croissante dans tableau
 
+enum crduEstInclus{
+	NON_INCLUSION,
+	INCLUSION_LARGE,
+	INCLUSION_STRICTE
+};
+
 class Ensemble{
 private:
 	//Attributs privés
@@ -36,4 +42,11 @@ public:
 	bool EstEgal(const Ensemble & unEnsemble);
 	// Compare si tous les élements de cet ensemble est dans unEnsemble
 	// et vice-versa. Si oui, retourne true
+
+	crduEstInclus EstInclus(const Ensemble & unEnsemble);
+	// Si les ensembles sont égaux, renvoie INCLUSION_LARGE
+	// Si tous les élements du premier sont dans le deuxième,
+	// mais ils ne sont pas égaux renvoie INCLUSION_STRICTE
+	// S'il y a un élement du premier n'est pas dans le deuxième,
+	// renvoie NON_INCLUSION
 };

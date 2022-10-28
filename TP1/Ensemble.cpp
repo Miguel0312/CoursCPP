@@ -15,7 +15,7 @@ cardMax(nbElements){
 	// Met les nbElements premiers élements de t en ordre croissante
 	// en utilisant un insertion sort
 	// En suite met les élements dans l'ensemble sans prendre les repetés
-	for(int i = 0; i < nbElements-1; i++){
+	for(int i = 0; i+1 < nbElements; i++){
 		int m = t[i], index = i;
 		for(int j = i+1; j < nbElements; j++){
 			if(t[j] < m){
@@ -70,3 +70,24 @@ bool Ensemble::EstEgal(const Ensemble & unEnsemble){
 	return true;
 }
 
+crduEstInclus Ensemble::EstInclus(const Ensemble & unEnsemble){
+	if(this->EstEgal(unEnsemble))
+		return crduEstInclus::INCLUSION_LARGE;
+
+	if(cardActuelle > unEnsemble.cardMax)
+		return crduEstInclus::NON_INCLUSION;
+
+	for(int i = 0; i < cardActuelle; i++){
+		bool found = false;
+		for(int j = 0; j < unEnsemble.cardActuelle; j++){
+			if(unEnsemble.tableau[j] == tableau[i]){
+				found = true;
+				break;
+			}
+		}
+		if(!found)
+			return crduEstInclus::NON_INCLUSION;
+	}
+
+	return crduEstInclus::INCLUSION_STRICTE;
+}

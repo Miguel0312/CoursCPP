@@ -30,7 +30,20 @@ static void testEstEgal(){
 		std::cout << "Différents" << std::endl;
 }
 
+static void testInclusion(){
+	int t1[] = {3, 3, 4 , 5, 2, 2, 1};
+	int t2[] = {1, 2, 3, 4, 4};
+
+	Ensemble ens1(t2, 5);
+	Ensemble ens2(t1, 7);
+	
+	if(ens1.EstInclus(ens2) == crduEstInclus::INCLUSION_STRICTE)
+		std::cout << "Est inclus" << std::endl;
+	else if(ens1.EstInclus(ens2) == crduEstInclus::NON_INCLUSION)
+		std::cout << "N'est pas inclus" << std::endl;
+}
+
 int main(){
-	testEstEgal();
+	testInclusion();
 	return 0;
 }
