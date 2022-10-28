@@ -1,13 +1,20 @@
+#include <iostream>
 #include "Ensemble.h"
 
 Ensemble::Ensemble(unsigned int pCardMax):
 cardMax(pCardMax){
 	cardActuelle = 0;
-	tableau = new int[cardMax];
+	if(pCardMax != 0)
+		tableau = new int[cardMax];
+	else
+		tableau = NULL;
 }
 
 Ensemble::Ensemble(int t[], unsigned int nbElements):
 cardMax(nbElements){
+	// Met les nbElements premiers élements de t en ordre croissante
+	// en utilisant un insertion sort
+	// En suite met les élements dans l'ensemble sans prendre les repetés
 	for(int i = 0; i < nbElements-1; i++){
 		int m = t[i], index = i;
 		for(int j = i+1; j < nbElements; j++){
@@ -22,20 +29,12 @@ cardMax(nbElements){
 	}
 
 	cardActuelle = 0;
+	tableau = new int[nbElements];
 
 	for(int i = 0; i < nbElements; i++){
 		if(i == nbElements - 1 || t[i] != t[i+1]){
+			tableau[cardActuelle] = t[i];
 			cardActuelle++;
-		}
-	}
-
-	tableau = new int[cardActuelle];
-
-	int index = 0;
-	for(int i = 0; i < nbElements; i++){
-		if(i == nbElements - 1 || t[i] != t[i+1]){
-			tableau[index] = t[i];
-			index++;
 		}
 	}
 }
@@ -54,3 +53,20 @@ void Ensemble::Afficher(void){
 	}
 	std::cout << "}\r\n";
 }
+
+bool Ensemble::EstEgal(const Ensemble & unEnsemble){
+	// Si les ensembles ont un nombre différent d'élements, ils ne peuvent pas être égaux
+	// On utilise le fait que les élements dans les tableaux sont triés de manière croissante
+	// Alors, le ième élement de tableau doit correspondre à l'ième élement de tableau2
+	// pour qu'ils soient égaux
+	if(cardActuelle != unEnsemble.cardActuelle)
+		return false;
+
+	for(int i = 0; i < cardActuelle; i++){
+		if(tableau[i] != unEnsemble.tableau[i])
+			return false;
+	}
+
+	return true;
+}
+
