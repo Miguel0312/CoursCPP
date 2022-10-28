@@ -12,28 +12,31 @@ cardMax(pCardMax){
 
 Ensemble::Ensemble(int t[], unsigned int nbElements):
 cardMax(nbElements){
+	int s[nbElements];
+	for(int i = 0; i < nbElements; i++)
+		s[i] = t[i];
 	// Met les nbElements premiers élements de t en ordre croissante
 	// en utilisant un insertion sort
 	// En suite met les élements dans l'ensemble sans prendre les repetés
 	for(int i = 0; i+1 < nbElements; i++){
-		int m = t[i], index = i;
+		int m = s[i], index = i;
 		for(int j = i+1; j < nbElements; j++){
-			if(t[j] < m){
-				m = t[j];
+			if(s[j] < m){
+				m = s[j];
 				index = j;
 			}
 		}
-		int tmp = t[i];
-		t[i] = t[index];
-		t[index] = tmp;
+		int tmp = s[i];
+		s[i] = s[index];
+		s[index] = tmp;
 	}
 
 	cardActuelle = 0;
 	tableau = new int[nbElements];
 
 	for(int i = 0; i < nbElements; i++){
-		if(i == nbElements - 1 || t[i] != t[i+1]){
-			tableau[cardActuelle] = t[i];
+		if(i == nbElements - 1 || s[i] != s[i+1]){
+			tableau[cardActuelle] = s[i];
 			cardActuelle++;
 		}
 	}
