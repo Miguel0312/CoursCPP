@@ -12,6 +12,12 @@ enum crduEstInclus{
 	INCLUSION_STRICTE
 };
 
+enum crduAjouter{
+	DEJA_PRESENT,
+	PLEIN,
+	AJOUTE
+};
+
 class Ensemble{
 private:
 	//Attributs privés
@@ -39,14 +45,45 @@ public:
 	// Dans la deuxième, affiche la cardinalité maximale
 	// Dans la troisième, affiche tous les élements de l'ensemble en ordre croissante
 
-	bool EstEgal(const Ensemble & unEnsemble);
+	bool EstEgal(const Ensemble & unEnsemble) const;
 	// Compare si tous les élements de cet ensemble est dans unEnsemble
 	// et vice-versa. Si oui, retourne true
 
-	crduEstInclus EstInclus(const Ensemble & unEnsemble);
+	crduEstInclus EstInclus(const Ensemble & unEnsemble) const;
 	// Si les ensembles sont égaux, renvoie INCLUSION_LARGE
 	// Si tous les élements du premier sont dans le deuxième,
 	// mais ils ne sont pas égaux renvoie INCLUSION_STRICTE
 	// S'il y a un élement du premier n'est pas dans le deuxième,
 	// renvoie NON_INCLUSION
+
+	crduAjouter Ajouter(int aAjouter);
+	// Renvoie DEJA_PRESENT si aAjouter est déjà présent
+	// Sinon, renvoie PLEIN si le tableau est plein
+	// Sinon, ajoute l'élement est renvoie AJOUTE
+
+	unsigned int Ajuster(int delta);
+	// Si delta>=0, augmente cardMax de delta
+	// Si delta<0, diminue cardMax au maximum de delta, sans perdre d'élements
+	// Renvoie la nouvelle cardMax
+
+	bool Retirer(int element);
+	// Retire element de l'ensemble
+	// Renvoie true s'il était présent, false sinon
+	// Il change cardMax pour qu'elle soit égale à cardActuelle après la suppression
+
+	unsigned int Retirer(const Ensemble & unEnsemble);
+	// Retire tous les élements de unEnsemble qui sont dans l'ensemble actuel
+	// Renvoie le nombre d'élements supprimés
+	// Il ne chage pas cardMax
+
+	int Reunir(const Ensemble & unEnsemble);
+	// Ajoute tous les élements d'unEnsemble a cet ensemble
+	// Renvoie le nombre dont la valeur absolue est égal au nombre d'élements
+	// effectivement rajoutés.
+	// Il est positif si cardMax n'a pas changé, négatif sinon
+
+	unsigned int Intersection(const Ensemble & unEnsemble);
+	// Rend cet ensemble égal l'intersection entre les deux ensembles
+	// Rend cardMax = cardActuelle
+	// Renvoie le nobre d'élement supprimés
 };
