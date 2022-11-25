@@ -36,6 +36,12 @@ public:
     // Contrat :
     //
 
+    Node* getHead() const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
 
 //-------------------------------------------- Constructeurs - destructeur
     ListeTrajet();

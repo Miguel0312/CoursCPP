@@ -32,6 +32,9 @@ void ListeTrajet::ajouterTrajet(const Trajet* const newT){
     head = newHead;
 }
 
+Node* ListeTrajet::getHead() const{
+    return head;
+}
 //-------------------------------------------- Constructeurs - destructeur
 /*Xxx::Xxx ( const Xxx & unXxx )
 // Algorithme :
