@@ -29,7 +29,7 @@ class Catalogue
 
 public:
 //----------------------------------------------------- Méthodes publiques
-  void AjouterTrajet(const Trajet t);
+  void AjouterTrajet(const Trajet* t);
   // Mode d'emploi :
   //
   // Contrat :

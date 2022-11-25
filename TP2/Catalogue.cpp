@@ -16,21 +16,29 @@ using namespace std;
 #include <cstring>
 
 //------------------------------------------------------ Include personnel
-#include "Node.h"
-#include "Trajet.h"
-#include "ListeTrajet.h"
+#include "Catalogue.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
-
-//----------------------------------------------------- Méthodes publiques
-void ListeTrajet::ajouterTrajet(const Trajet* const newT){
-    Node* newHead = new Node;
-    newHead->setTrajet(newT);
-    newHead->setNext(head);
-    head = newHead;
+void Catalogue::AjouterTrajet(const Trajet* t){
+    trajets.ajouterTrajet(t);
 }
+//----------------------------------------------------- Méthodes publiques
+// type Xxx::Méthode ( liste des paramètres )
+// Algorithme :
+//
+//{
+//} //----- Fin de Méthode
+
+
+//------------------------------------------------- Surcharge d'opérateurs
+//Xxx & Xxx::operator = ( const Xxx & unXxx )
+// Algorithme :
+//
+//{
+//} //----- Fin de operator =
+
 
 //-------------------------------------------- Constructeurs - destructeur
 /*Xxx::Xxx ( const Xxx & unXxx )
@@ -40,29 +48,26 @@ void ListeTrajet::ajouterTrajet(const Trajet* const newT){
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Xxx>" << endl;
 #endif
-} //----- Fin de Xxx (constructeur de copie)
-*/
+} //----- Fin de Xxx (constructeur de copie)*/
 
-ListeTrajet::ListeTrajet() :
-head(nullptr)
+/*Xxx::Xxx ( )
+// Algorithme :
+//
 {
 #ifdef MAP
-    cout << "Appel au constructeur de ListeTrajet" << endl;
+    cout << "Appel au constructeur de <Xxx>" << endl;
 #endif
-} //----- Fin de ListeTrajet
+} //----- Fin de Xxx*/
 
-ListeTrajet::~ListeTrajet()
+
+/*Xxx::~Xxx ( )
+// Algorithme :
+//
 {
-    while(head!=nullptr){
-        Node* n = head;
-        head = head->getNext();
-        delete n->getTrajet();
-        delete n;
-    }
 #ifdef MAP
-    cout << "Appel au destructeur de ListeTrajet" << endl;
+    cout << "Appel au destructeur de <Xxx>" << endl;
 #endif
-} //----- Fin de ~ListeTrajet
+} //----- Fin de ~Xxx*/
 
 
 //------------------------------------------------------------------ PRIVE

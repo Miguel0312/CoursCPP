@@ -36,6 +36,13 @@ public:
   // Contrat :
   //
 
+//-------------------------------------------- Constructeurs - destructeur
+    virtual ~Trajet();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //*/
+
 //-------------------------------------------------------------- PROTECTED
 protected:
 //----------------------------------------------------- Attributs protégés

@@ -30,19 +30,7 @@ class ListeTrajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-    
-    void ajouterTrajet(Trajet* newT);
-
-    ListeTrajet();
-    ~ListeTrajet();
-
-//------------------------------------------------- Surcharge d'opérateurs
-    /*Xxx & operator = ( const Xxx & unXxx );
+    void ajouterTrajet(const Trajet* const newT);
     // Mode d'emploi :
     //
     // Contrat :
@@ -50,23 +38,17 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Xxx ( const Xxx & unXxx );
+    ListeTrajet();
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Xxx ( );
+    ~ListeTrajet();
     // Mode d'emploi :
     //
     // Contrat :
     //
-
-    virtual ~Xxx ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //*/
 
 //------------------------------------------------------------------ PRIVE
 private:
