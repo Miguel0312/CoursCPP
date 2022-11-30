@@ -1,0 +1,23 @@
+#include<stdio.h>
+
+int main(){
+  int v,s;
+  scanf("%d %d",&v, &s);
+
+  int possible[21000] = {0};
+  possible[s] = 1;
+  int begin = 0;
+  int size = 1;
+  int values_array[21000];
+  values_array[0] = s;
+
+  while(new_values != 0){
+    int i;
+    for(i = 0; i<values_array; i++){
+      if(2*s<=v && !possible[2*s]){
+        possible[2*s] = 1;
+        
+      }
+    }
+  }
+}

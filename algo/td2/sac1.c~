@@ -1,0 +1,17 @@
+#include<stdio.h>
+
+int main(){
+  int objects[100];
+  int capacity;
+  int count = 0;
+  scanf("%d", &capacity);
+  while(1){
+    int x;
+    scanf("%d", x);
+    if(x==-1)
+      break;
+
+    objects[count]=x;
+    count++;
+  }
+}

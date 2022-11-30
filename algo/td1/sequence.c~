@@ -1,0 +1,13 @@
+#include<stdio.h>
+
+int main(){
+  double values[5100];
+  int n;
+  scanf("%d", n);
+  int i;
+  for(i=0;i<n;i++){
+    scanf("%lf",values[i]);
+  }
+
+
+}
