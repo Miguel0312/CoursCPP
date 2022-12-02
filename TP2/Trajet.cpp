@@ -29,11 +29,21 @@ void Trajet::Affichage() const
 {
 } //----- Fin de Méthode
 
+  char* Trajet::getDepart() const{
+    return depart;
+  }
+
+  char* Trajet::getArrivee() const{
+    return arrivee;
+  }
 
 //------------------------------------------------- Surcharge d'opérateurs
 
 
 //-------------------------------------------- Constructeurs - destructeur
+
+Trajet::Trajet():
+depart(nullptr), arrivee(nullptr){}
 
 Trajet::Trajet(const char* d, const char* a)
 // Algorithme :
