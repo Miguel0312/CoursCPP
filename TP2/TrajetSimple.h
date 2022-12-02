@@ -28,6 +28,9 @@ class TrajetSimple : public Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
+  
+  char * getTransport() const;
+  
   virtual void Affichage() const;
   // Mode d'emploi :
   //
@@ -35,6 +38,8 @@ public:
   //
 
 //-------------------------------------------- Constructeurs - destructeur
+  TrajetSimple(const TrajetSimple& t);
+  
   TrajetSimple(const char* d, const char* a, const char* t);
   // Mode d'emploi :
   //

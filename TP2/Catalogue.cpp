@@ -36,7 +36,27 @@ void Catalogue::RechercheSimple(const char* depart, const char* arrivee) const
 // Algorithme :
 //
 {
-    
+    ListeTrajet chemins;
+    Node* cur = trajets.getHead();
+
+    while(cur != nullptr){
+        if(strcmp(depart, cur->getTrajet()->getDepart()) == 0 &&
+           strcmp(arrivee, cur->getTrajet()->getArrivee()) == 0){
+            chemins.ajouterTrajet(cur->getTrajet());
+           }
+        cur = cur->getNext();
+    }
+
+    cout << "Chemins possibles entre " << depart << " et " << arrivee << endl;
+    cur = chemins.getHead();
+    int n = 1;
+    while(cur != nullptr){
+        cout << n++ << ") ";
+        cur->getTrajet()->Affichage();
+        cur = cur->getNext();
+        if(cur != nullptr)
+            printf("\r\n");
+    }
 }
 
 void Catalogue::Affichage() const{

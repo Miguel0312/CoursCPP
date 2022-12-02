@@ -29,26 +29,22 @@ void TrajetCompose::Affichage() const
 // Algorithme :
 //
 {
-    int nbTrajets = 0;
-    Node* current = trajets.getHead();
-    while(current !=nullptr){
-        nbTrajets++;
-    }
+    int nbTrajets = trajets.getTaille();
     cout<<"Trajet compose avec "<<nbTrajets<<" trajets simples.\n";
     Node* head = trajets.getHead();
     while(head!=nullptr){
+        cout << "   ";
         head->getTrajet()->Affichage();
         head = head->getNext();
     }
 } //----- Fin de Méthode
 
-void TrajetCompose::AjouterTrajet(TrajetSimple t){
+void TrajetCompose::AjouterTrajet(TrajetSimple& t){
     
     if(trajets.getHead() == nullptr){
         char* tDepart = t.getDepart();
         depart = new char[strlen(tDepart)+1];
         strcpy(depart, tDepart);
-        depart = t.getDepart();
     }
     if(arrivee!=nullptr){
         delete[] arrivee;
@@ -76,7 +72,7 @@ TrajetCompose::TrajetCompose ()
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Xxx>" << endl;
+    cout << "Appel au constructeur de <TrajetCompose>" << endl;
 #endif
 } //----- Fin de TrajetSimple
 
@@ -84,14 +80,15 @@ TrajetCompose::~TrajetCompose ( )
 // Algorithme :
 //
 {
+#ifdef MAP
+    cout << "Appel au destructeur de <TrajetCompose>" << endl;
+#endif
+
     Node* cur = trajets.getHead();
     while(cur!=nullptr){
         delete cur->getTrajet();
         cur = cur->getNext();
     }
-#ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
-#endif
 } //----- Fin de ~Xxx
 
 

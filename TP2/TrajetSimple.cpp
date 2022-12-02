@@ -25,6 +25,10 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
+char * TrajetSimple::getTransport() const{
+    return transport;
+}
+
 void TrajetSimple::Affichage() const{
     cout<<"De "<<depart<<" a "<<arrivee<<" en "<<transport<<"\n";
 }
@@ -39,18 +43,31 @@ void TrajetSimple::Affichage() const{
 
 
 //-------------------------------------------- Constructeurs - destructeur
+
+
+TrajetSimple::TrajetSimple (const TrajetSimple& t) :
+TrajetSimple(t.getDepart(), t.getArrivee(), t.getTransport())
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de copie de <TrajetSimple>" << endl;
+#endif
+
+} //----- Fin de TrajetSimple (constructeur de copie)
+
 TrajetSimple::TrajetSimple (const char* d, const char* a, const char* t) :
 Trajet(d, a)
 // Algorithme :
 //
 {
-    transport = new char[strlen(t)+1];
-    strcpy(transport, t);
-
 #ifdef MAP
     cout << "Appel au constructeur de TrajetSimple" << endl;
 #endif
-} //----- Fin de Xxx (constructeur de copie)
+
+    transport = new char[strlen(t)+1];
+    strcpy(transport, t);
+} //----- Fin de TrajetSimple (constructeur)
 
 TrajetSimple::~TrajetSimple()
 // Algorithme :

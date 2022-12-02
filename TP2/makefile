@@ -2,7 +2,7 @@ INT = $(wildcard *.h)
 SRC = $(INT:.h=.cpp) main.cpp
 OBJ = $(INT:.h=.o) main.o
 LIBS = -lm
-CPPFLAGS = -ansi -pedantic -Wall -std=c++11 -g #-D MAP
+CPPFLAGS = -ansi -pedantic -Wall -std=c++11 #-g -D MAP
 LDFLAGS = 
 RM = rm
 ECHO = echo
