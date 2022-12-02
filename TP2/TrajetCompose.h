@@ -13,6 +13,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include "ListeTrajet.h"
 #include "Trajet.h"
+#include "TrajetSimple.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -35,8 +36,10 @@ public:
   // Contrat :
   //
 
+  void TrajetCompose::AjouterTrajet(TrajetSimple t);
+
 //-------------------------------------------- Constructeurs - destructeur
-  TrajetCompose(const unsigned int n, const char* d[], const char* a[], const char* t[]);
+  TrajetCompose();
   // Mode d'emploi (constructeur de copie) :
   //
   // Contrat :

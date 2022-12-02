@@ -36,11 +36,15 @@ public:
     // Contrat :
     //
 
+    void ajouterTrajetFin(const Trajet* const newT);
+
     Node* getHead() const;
     // Mode d'emploi :
     //
     // Contrat :
     //
+
+    int getTaille() const;
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -59,6 +63,7 @@ public:
 //------------------------------------------------------------------ PRIVE
 private:
     Node* head;
+    int taille;
 
 protected:
 //----------------------------------------------------- Méthodes protégées

@@ -26,14 +26,35 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 void ListeTrajet::ajouterTrajet(const Trajet* const newT){
+    taille++;
     Node* newHead = new Node;
     newHead->setTrajet(newT);
     newHead->setNext(head);
     head = newHead;
 }
 
+void ListeTrajet::ajouterTrajetFin(const Trajet* const newT){
+    taille++;
+    Node* tail = new Node;
+    tail->setTrajet(newT);
+    tail->setNext(nullptr);
+    if(head == nullptr){
+        head = tail;
+        return;
+    }
+    Node* cur = head;
+    while(cur->getNext()!=nullptr){
+        cur = cur->getNext(); 
+    }
+    cur->setNext(tail);
+}
+
 Node* ListeTrajet::getHead() const{
     return head;
+}
+
+int ListeTrajet::getTaille() const{
+    return taille;
 }
 //-------------------------------------------- Constructeurs - destructeur
 /*Xxx::Xxx ( const Xxx & unXxx )
@@ -47,7 +68,7 @@ Node* ListeTrajet::getHead() const{
 */
 
 ListeTrajet::ListeTrajet() :
-head(nullptr)
+head(nullptr), taille(0)
 {
 #ifdef MAP
     cout << "Appel au constructeur de ListeTrajet" << endl;
