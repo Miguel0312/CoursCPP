@@ -17,56 +17,54 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Catalogue.h"
+#include "Node.h"
+#include "ListeTrajet.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
-void Catalogue::AjouterTrajet(const Trajet* t){
+
+//----------------------------------------------------- Méthodes publiques
+void Catalogue::AjouterTrajet(const Trajet* t)
+// Algorithme :
+//
+{
     trajets.ajouterTrajet(t);
 }
-//----------------------------------------------------- Méthodes publiques
-// type Xxx::Méthode ( liste des paramètres )
+
+void Catalogue::RechercheSimple(const char* depart, const char* arrivee) const
 // Algorithme :
 //
-//{
-//} //----- Fin de Méthode
+{
+    
+}
 
-
-//------------------------------------------------- Surcharge d'opérateurs
-//Xxx & Xxx::operator = ( const Xxx & unXxx )
-// Algorithme :
-//
-//{
-//} //----- Fin de operator =
-
+void Catalogue::Affichage() const{
+    Node* cur = trajets.getHead();
+    while(cur != nullptr){
+        cur->getTrajet()->Affichage();
+        cur = cur->getNext();
+    }
+}
 
 //-------------------------------------------- Constructeurs - destructeur
-/*Xxx::Xxx ( const Xxx & unXxx )
+Catalogue::Catalogue() :
+trajets(ListeTrajet())
 // Algorithme :
 //
 {
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Xxx>" << endl;
-#endif
-} //----- Fin de Xxx (constructeur de copie)*/
+    #ifdef MAP
+        cout << "Appel au constructeur de copie de Catalogue" << endl;
+    #endif
+} //----- Fin de Catalogue (constructeur de copie)
 
-/*Xxx::Xxx ( )
+Catalogue::~Catalogue()
 // Algorithme :
 //
 {
-#ifdef MAP
-    cout << "Appel au constructeur de <Xxx>" << endl;
-#endif
-} //----- Fin de Xxx*/
-
-
-/*Xxx::~Xxx ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
-#endif
+    #ifdef MAP
+        cout << "Appel au destructeur de <Xxx>" << endl;
+    #endif
 } //----- Fin de ~Xxx*/
 
 
