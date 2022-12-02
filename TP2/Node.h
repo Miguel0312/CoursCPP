@@ -12,5 +12,7 @@ public:
 
     void setTrajet(const Trajet* newT);
     void setNext(Node* nextNode);
+
+    virtual ~Node();
 };
 #endif

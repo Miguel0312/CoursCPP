@@ -56,15 +56,14 @@ head(nullptr)
 
 ListeTrajet::~ListeTrajet()
 {
+#ifdef MAP
+    cout << "Appel au destructeur de <ListeTrajet>" << endl;
+#endif
     while(head!=nullptr){
         Node* n = head;
         head = head->getNext();
-        delete n->getTrajet();
         delete n;
     }
-#ifdef MAP
-    cout << "Appel au destructeur de ListeTrajet" << endl;
-#endif
 } //----- Fin de ~ListeTrajet
 
 

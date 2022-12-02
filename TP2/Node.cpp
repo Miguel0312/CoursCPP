@@ -16,3 +16,7 @@ void Node::setTrajet(const Trajet* newT){
 void Node::setNext(Node* nextNode){
     next = nextNode;
 }
+
+Node::~Node(){
+    
+}

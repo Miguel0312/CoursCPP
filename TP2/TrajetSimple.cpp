@@ -39,15 +39,12 @@ void TrajetSimple::Affichage() const{
 
 
 //-------------------------------------------- Constructeurs - destructeur
-TrajetSimple::TrajetSimple (const char* d, const char* a, const char* t)
+TrajetSimple::TrajetSimple (const char* d, const char* a, const char* t) :
+Trajet(d, a)
 // Algorithme :
 //
 {
-    depart = new char(strlen(d)+1);
-    arrivee = new char(strlen(a)+1);
-    transport = new char(strlen(t)+1);
-    strcpy(depart, d);
-    strcpy(arrivee, a);
+    transport = new char[strlen(t)+1];
     strcpy(transport, t);
 
 #ifdef MAP
@@ -59,13 +56,11 @@ TrajetSimple::~TrajetSimple()
 // Algorithme :
 //
 {
-    delete depart;
-    delete arrivee;
-    delete transport;
+    delete[] transport;
 #ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
+    cout << "Appel au destructeur de <TrajetSimple>" << endl;
 #endif
-} //----- Fin de ~Xxx
+} //----- Fin de ~TrajetSimple
 
 
 //------------------------------------------------------------------ PRIVE

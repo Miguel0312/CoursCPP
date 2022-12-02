@@ -23,11 +23,11 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Xxx::Méthode ( liste des paramètres )
-// Algorithme :
+void Trajet::Affichage() const
+//Algorithme :
 //
-//{
-//} //----- Fin de Méthode
+{
+} //----- Fin de Méthode
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -39,24 +39,24 @@ Trajet::Trajet(const char* d, const char* a)
 // Algorithme :
 //
 {
-    depart = new char(strlen(d)+1);
-    arrivee = new char(strlen(a)+1);
+    depart = new char[strlen(d)+1];
+    arrivee = new char[strlen(a)+1];
     strcpy(depart, d);
     strcpy(arrivee, a);
 #ifdef MAP
-    cout << "Appel au constructeur de <Xxx>" << endl;
+    cout << "Appel au constructeur de <Trajet>" << endl;
 #endif
 } //----- Fin de Xxx
 
 
-Trajet::~Trajet ( )
+Trajet::~Trajet()
 // Algorithme :
 //
 {
-    delete depart;
-    delete arrivee;
+    delete[] depart;
+    delete[] arrivee;
 #ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
+    cout << "Appel au destructeur de <Trajet>" << endl;
 #endif
 } //----- Fin de ~Xxx
 

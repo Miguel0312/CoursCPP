@@ -53,19 +53,19 @@ trajets(ListeTrajet())
 // Algorithme :
 //
 {
-    #ifdef MAP
-        cout << "Appel au constructeur de copie de Catalogue" << endl;
-    #endif
-} //----- Fin de Catalogue (constructeur de copie)
+#ifdef MAP
+    cout << "Appel au constructeur de copie de Catalogue" << endl;
+#endif
+} //----- Fin du constructeur de Catalogue
 
 Catalogue::~Catalogue()
 // Algorithme :
 //
 {
-    #ifdef MAP
-        cout << "Appel au destructeur de <Xxx>" << endl;
-    #endif
-} //----- Fin de ~Xxx*/
+#ifdef MAP
+    cout << "Appel au destructeur de <Catalogue>" << endl;
+#endif
+} //----- Fin de ~Catalogue*/
 
 
 //------------------------------------------------------------------ PRIVE
