@@ -37,11 +37,17 @@ public:
   //
 
 //-------------------------------------------- Constructeurs - destructeur
-    virtual ~Trajet();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //*/
+   Trajet(const char* d, const char* a);
+  // Mode d'emploi :
+  //
+  // Contrat :
+  //
+
+  virtual ~Trajet();
+  // Mode d'emploi :
+  //
+  // Contrat :
+  //*/
 
 //-------------------------------------------------------------- PROTECTED
 protected:
