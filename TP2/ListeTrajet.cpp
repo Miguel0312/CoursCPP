@@ -49,6 +49,34 @@ void ListeTrajet::ajouterTrajetFin(const Trajet* const newT){
     cur->setNext(tail);
 }
 
+void ListeTrajet::Affichage(){
+    Node* cur = head;
+    while(cur != nullptr){
+        cur->getTrajet()->Affichage();
+        cur = cur->getNext();
+    }
+}
+
+void ListeTrajet::EnleverFin(){
+    if(head == nullptr)
+        return;
+    if(head->getNext() == nullptr){
+        taille--;
+        delete head;
+        head = nullptr;
+        return;
+    }
+
+    Node* tail = head;
+    while(tail->getNext()->getNext() != nullptr){
+        tail = tail->getNext();
+    }
+
+    delete tail->getNext();
+    tail->setNext(nullptr);
+    taille--;
+}
+
 Node* ListeTrajet::getHead() const{
     return head;
 }
@@ -57,15 +85,6 @@ int ListeTrajet::getTaille() const{
     return taille;
 }
 //-------------------------------------------- Constructeurs - destructeur
-/*Xxx::Xxx ( const Xxx & unXxx )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Xxx>" << endl;
-#endif
-} //----- Fin de Xxx (constructeur de copie)
-*/
 
 ListeTrajet::ListeTrajet() :
 head(nullptr), taille(0)

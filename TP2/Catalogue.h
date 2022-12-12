@@ -41,6 +41,16 @@ public:
   // Contrat :
   //
 
+  void RechercheAvancee(const char* depart, const char* arrivee) const;
+  // Mode d'emploi :
+  //
+  // Contrat :
+  //
+
+  void DFS(const char* const depart,
+         const char* const arrivee, bool* visited,
+         ListeTrajet& cheminActuel, int n, int& m) const;
+
   void Affichage() const;
   // Mode d'emploi :
   //

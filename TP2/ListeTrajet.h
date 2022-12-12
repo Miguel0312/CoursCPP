@@ -38,6 +38,10 @@ public:
 
     void ajouterTrajetFin(const Trajet* const newT);
 
+    void Affichage();
+
+    void EnleverFin();
+
     Node* getHead() const;
     // Mode d'emploi :
     //

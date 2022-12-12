@@ -59,6 +59,47 @@ void Catalogue::RechercheSimple(const char* depart, const char* arrivee) const
     }
 }
 
+void Catalogue::RechercheAvancee(const char* depart, const char* arrivee) const{
+    cout << "Chemins possibles entre " << depart << " et " << arrivee
+         << " (recherche avancee)" << endl;
+    if(trajets.getTaille() == 0)
+        return;
+    // Obtenir les noeuds
+    int n = trajets.getTaille(), m = 1;
+    
+    bool* visited = new bool[n];
+    for(int i = 0; i < n; i++)
+        visited[i] = false;
+
+    ListeTrajet cheminActuel;
+    DFS(depart, arrivee, visited, cheminActuel, n, m);
+
+    delete[] visited;
+}
+
+void Catalogue::DFS(const char* const depart,
+         const char* const arrivee, bool* visited,
+         ListeTrajet& cheminActuel, int n, int& m) const{
+    if(strcmp(depart, arrivee) == 0){
+        cout << m << ")" << endl;
+        cheminActuel.Affichage();
+        m++;
+        return;
+    }
+
+    Node* curNode = trajets.getHead();
+    for(int j = 0; j < n; j++){
+        if(!visited[j] && strcmp(depart, curNode->getTrajet()->getDepart()) == 0){
+            visited[j] = true;
+            cheminActuel.ajouterTrajetFin(curNode->getTrajet());
+            DFS(curNode->getTrajet()->getArrivee(), arrivee, visited, cheminActuel, n, m);
+            cheminActuel.EnleverFin();
+            visited[j] = false;
+        }
+        curNode = curNode->getNext();
+    }
+}
+
 void Catalogue::Affichage() const{
     Node* cur = trajets.getHead();
     while(cur != nullptr){
