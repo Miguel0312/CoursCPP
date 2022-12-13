@@ -46,8 +46,12 @@ void Catalogue::RechercheSimple(const char* depart, const char* arrivee) const
            }
         cur = cur->getNext();
     }
-
-    cout << "Chemins possibles entre " << depart << " et " << arrivee << endl;
+    if(chemins.getHead()!= nullptr){
+        cout << "Chemins possibles entre " << depart << " et " << arrivee << endl;
+    }
+    else{
+        cout<<"Il n'y a aucun chemin possible entre "<< depart << " et " << arrivee << endl;
+    }
     cur = chemins.getHead();
     int n = 1;
     while(cur != nullptr){

@@ -46,6 +46,10 @@ void TrajetCompose::AjouterTrajet(TrajetSimple& t){
         depart = new char[strlen(tDepart)+1];
         strcpy(depart, tDepart);
     }
+    else if(strcmp(arrivee, t.getDepart())){
+        cout<<"ERREUR: le depart du chemin simple actuel doit etre egal a l'arrive du anterieur\n";
+        return;
+    }
     if(arrivee!=nullptr){
         delete[] arrivee;
     }
