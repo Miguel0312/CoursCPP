@@ -39,7 +39,7 @@ void TrajetCompose::Affichage() const
     }
 } //----- Fin de Méthode
 
-void TrajetCompose::AjouterTrajet(TrajetSimple& t){
+bool TrajetCompose::AjouterTrajet(TrajetSimple& t){
     
     if(trajets.getHead() == nullptr){
         char* tDepart = t.getDepart();
@@ -48,7 +48,7 @@ void TrajetCompose::AjouterTrajet(TrajetSimple& t){
     }
     else if(strcmp(arrivee, t.getDepart())){
         cout<<"ERREUR: le depart du chemin simple actuel doit etre egal a l'arrive du anterieur\n";
-        return;
+        return false;
     }
     if(arrivee!=nullptr){
         delete[] arrivee;
@@ -59,6 +59,7 @@ void TrajetCompose::AjouterTrajet(TrajetSimple& t){
 
     TrajetSimple* tCopy = new TrajetSimple(t);
     trajets.ajouterTrajetFin(tCopy);
+    return true;
 }
 
 

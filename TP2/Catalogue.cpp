@@ -32,7 +32,7 @@ void Catalogue::AjouterTrajet(const Trajet* t)
     trajets.ajouterTrajet(t);
 }
 
-void Catalogue::RechercheSimple(const char* depart, const char* arrivee) const
+bool Catalogue::RechercheSimple(const char* depart, const char* arrivee) const
 // Algorithme :
 //
 {
@@ -50,7 +50,7 @@ void Catalogue::RechercheSimple(const char* depart, const char* arrivee) const
         cout << "Chemins possibles entre " << depart << " et " << arrivee << endl;
     }
     else{
-        cout<<"Il n'y a aucun chemin possible entre "<< depart << " et " << arrivee << endl;
+        return false;
     }
     cur = chemins.getHead();
     int n = 1;
@@ -61,13 +61,14 @@ void Catalogue::RechercheSimple(const char* depart, const char* arrivee) const
         if(cur != nullptr)
             printf("\r\n");
     }
+    return true;
 }
 
-void Catalogue::RechercheAvancee(const char* depart, const char* arrivee) const{
+bool Catalogue::RechercheAvancee(const char* depart, const char* arrivee) const{
     cout << "Chemins possibles entre " << depart << " et " << arrivee
          << " (recherche avancee)" << endl;
     if(trajets.getTaille() == 0)
-        return;
+        return false;
     // Obtenir les noeuds
     int n = trajets.getTaille(), m = 1;
     
@@ -76,32 +77,37 @@ void Catalogue::RechercheAvancee(const char* depart, const char* arrivee) const{
         visited[i] = false;
 
     ListeTrajet cheminActuel;
-    DFS(depart, arrivee, visited, cheminActuel, n, m);
+    bool resultat = DFS(depart, arrivee, visited, cheminActuel, n, m);
 
     delete[] visited;
+
+    return resultat;
 }
 
-void Catalogue::DFS(const char* const depart,
+bool Catalogue::DFS(const char* const depart,
          const char* const arrivee, bool* visited,
          ListeTrajet& cheminActuel, int n, int& m) const{
     if(strcmp(depart, arrivee) == 0){
         cout << m << ")" << endl;
         cheminActuel.Affichage();
         m++;
-        return;
+        return true;
     }
 
     Node* curNode = trajets.getHead();
+    bool resultat = false;
     for(int j = 0; j < n; j++){
         if(!visited[j] && strcmp(depart, curNode->getTrajet()->getDepart()) == 0){
             visited[j] = true;
             cheminActuel.ajouterTrajetFin(curNode->getTrajet());
-            DFS(curNode->getTrajet()->getArrivee(), arrivee, visited, cheminActuel, n, m);
+            resultat = DFS(curNode->getTrajet()->getArrivee(), arrivee, visited, cheminActuel, n, m) || resultat;
             cheminActuel.EnleverFin();
             visited[j] = false;
         }
         curNode = curNode->getNext();
     }
+
+    return resultat;
 }
 
 void Catalogue::Affichage() const{

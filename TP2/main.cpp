@@ -45,7 +45,8 @@ void ajouterCheminCompose(Catalogue &c){
         cout<<"Moyen de transport: ";
         cin>>transport;
         TrajetSimple* cur = new TrajetSimple(depart, arrivee, transport);
-        newTrajet->AjouterTrajet(*cur);
+        if(!newTrajet->AjouterTrajet(*cur))
+          i--;
         delete cur;
     }
     c.AjouterTrajet(newTrajet);
@@ -57,7 +58,9 @@ void rechercheSimple(const Catalogue &c){
     cin>>depart;
     cout<<"Ville d'arrivee: ";
     cin>>arrivee;
-    c.RechercheSimple(depart, arrivee);
+    if(c.RechercheSimple(depart, arrivee)){
+      cout<<"Il n'y a aucun chemin direct possible entre "<< depart << " et " << arrivee << endl;
+    }
 }
 
 void rechercheAvancee(const Catalogue &c){
@@ -66,7 +69,9 @@ void rechercheAvancee(const Catalogue &c){
     cin>>depart;
     cout<<"Ville d'arrivee: ";
     cin>>arrivee;
-    c.RechercheAvancee(depart, arrivee);
+    if(!c.RechercheAvancee(depart, arrivee)){
+      cout<<"Il n'y a aucun chemin possible entre "<< depart << " et " << arrivee << endl;
+    }
 }
 
 int main(){

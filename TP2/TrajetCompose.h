@@ -36,7 +36,7 @@ public:
   // Contrat :
   //
 
-  void AjouterTrajet(TrajetSimple& t);
+  bool AjouterTrajet(TrajetSimple& t);
 
 //-------------------------------------------- Constructeurs - destructeur
   TrajetCompose();

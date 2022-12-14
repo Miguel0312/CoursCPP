@@ -35,19 +35,19 @@ public:
   // Contrat :
   //
 
-  void RechercheSimple(const char* depart, const char* arrivee) const;
+  bool RechercheSimple(const char* depart, const char* arrivee) const;
   // Mode d'emploi :
   //
   // Contrat :
   //
 
-  void RechercheAvancee(const char* depart, const char* arrivee) const;
+  bool RechercheAvancee(const char* depart, const char* arrivee) const;
   // Mode d'emploi :
   //
   // Contrat :
   //
 
-  void DFS(const char* const depart,
+  bool DFS(const char* const depart,
          const char* const arrivee, bool* visited,
          ListeTrajet& cheminActuel, int n, int& m) const;
 
