@@ -1,26 +1,22 @@
 /*************************************************************************
-                           Xxx  -  description
+                           Catalogue  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 25/11/2022
+    auteurs              : Miguel Pereira, Artur Pereira
 *************************************************************************/
 
-//---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
+//---------- Interface de la classe <Catalogue> (fichier Catalogue.h) ----------
 #if !defined (CATALOGUE_H)
 #define CATALOGUE_H
 
 //--------------------------------------------------- Interfaces utilisées
 #include "ListeTrajet.h"
 #include "Trajet.h"
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Xxx>
-//
-//
+// Classe qui implémente un catalogue contenant une liste de trajets et qui
+// permmet la recherche des chemins entre deux villes en parcourant ces
+// trajets
 //------------------------------------------------------------------------
 
 class Catalogue
@@ -31,56 +27,52 @@ public:
 //----------------------------------------------------- Méthodes publiques
   void AjouterTrajet(const Trajet* t);
   // Mode d'emploi :
-  //
-  // Contrat :
-  //
+  // Ajoute un trajet à la liste de trajets du catalogue
 
   bool RechercheSimple(const char* depart, const char* arrivee) const;
   // Mode d'emploi :
-  //
-  // Contrat :
-  //
+  // Affiche les chemins composés d'un seul trajet entre les villes de départ
+  // et d'arrivée
+  // Renvoie vrai si et seulement si au moins un chemin entre les villes a
+  // été trouvé
 
   bool RechercheAvancee(const char* depart, const char* arrivee) const;
   // Mode d'emploi :
-  //
-  // Contrat :
-  //
-
-  bool DFS(const char* const depart,
-         const char* const arrivee, bool* visited,
-         ListeTrajet& cheminActuel, int n, int& m) const;
+  // Affiche tous les chemins entre les villes de départ et d'arrivée, même
+  // ceux qui sont composés de plus d'un trajet
+  // Renvoie vrai si et seulement si au moins un chemin entre les villes a
+  // été trouvé
 
   void Affichage() const;
   // Mode d'emploi :
-  //
-  // Contrat :
-  //
+  // Affiche tous les trajets du catalogue dans l'ordre opposée à l'ordre
+  // d'insertion
 
 //-------------------------------------------- Constructeurs - destructeur
   Catalogue();
   // Mode d'emploi (constructeur de copie) :
-  //
-  // Contrat :
-  //
+  // Construit un nouveau catalogue vide
 
   virtual ~Catalogue();
   // Mode d'emploi :
-  //
-  // Contrat :
-  //
+  //Détruit le trajet composé ainsi que les trajets qui le composent
 
 //------------------------------------------------------------------ PRIVE
 private:
-  ListeTrajet trajets;
-
-protected:
-//----------------------------------------------------- Méthodes protégées
+//----------------------------------------------------- Méthodes privées
+  bool dfs(const char* const depart,
+           const char* const arrivee, 
+           bool* visited,
+           ListeTrajet& cheminActuel, 
+           int n, 
+           int& m) const;
+  // Mode d'emploi :
+  // Fonction auxiliaire pour la méthode RechercheAvancée
+  // Utilise une méthode récursive pour faire un depth first search entre les
+  // villes de départ et d'arrivée
 
 //----------------------------------------------------- Attributs protégés
-
+  ListeTrajet trajets;
 };
 
-//-------------------------------- Autres définitions dépendantes de <Xxx>
-
-#endif // XXX_H
+#endif // CATALOGUE_H

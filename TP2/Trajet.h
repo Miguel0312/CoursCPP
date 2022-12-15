@@ -1,12 +1,11 @@
 /*************************************************************************
-                           Xxx  -  description
+                           Trajet  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 25/11/2022
+    auteurs              : Miguel Pereira, Artur Pereira
 *************************************************************************/
 
-//---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
+//---------- Interface de la classe <Trajet> (fichier Trajet.h) ----------------
 #if !defined (TRAJET_H)
 #define TRAJET_H
 
@@ -14,14 +13,10 @@
 using namespace std;
 #include <iostream>
 
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
-
 //------------------------------------------------------------------------
-// Rôle de la classe <Xxx>
-//
-//
+// Classe abstraite qui est super-classe de trajet simple et trajet composé
+//  Établit les points communs entre ces deux classes: ville de départ et
+//  d'arrivée ainsi qu'une méthode d'affichage
 //------------------------------------------------------------------------
 
 class Trajet
@@ -30,30 +25,22 @@ class Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-  virtual void Affichage() const;
+  virtual void Affichage() const = 0;
+  // Méthode virutel pure -> Rend cette classe abstraite (ne peut pas être
+  // instantiée)
+
+  char* GetDepart() const;
   // Mode d'emploi :
-  //
-  // Contrat :
-  //
+  // Renvoie le nom de la ville de départ
 
-  char* getDepart() const;
-
-  char* getArrivee() const;
+  char* GetArrivee() const;
+  // Mode d'emploi :
+  // Renvoie le nom de la ville d'arrivée
 
 //-------------------------------------------- Constructeurs - destructeur
   Trajet();
-  
-  Trajet(const char* d, const char* a);
-  // Mode d'emploi :
-  //
-  // Contrat :
-  //
 
   virtual ~Trajet();
-  // Mode d'emploi :
-  //
-  // Contrat :
-  //*/
 
 //-------------------------------------------------------------- PROTECTED
 protected:
@@ -62,6 +49,4 @@ protected:
   char * arrivee;
 };
 
-//-------------------------------- Autres définitions dépendantes de <Xxx>
-
-#endif // XXX_H
+#endif // TRAJET_H

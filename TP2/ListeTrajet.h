@@ -1,12 +1,11 @@
 /*************************************************************************
-                           Xxx  -  description
+                           ListeTrajet  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 25/11/2022
+    auteurs              : Miguel Pereira, Artur Pereira
 *************************************************************************/
 
-//---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
+//---------- Interface de la classe <ListeTrajet> (fichier ListeTrajet.h) ------
 #if ! defined ( LISTE_TRAJET_H )
 #define LISTE_TRAJET_H
 
@@ -14,14 +13,8 @@
 #include "Node.h"
 #include "Trajet.h"
 
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
-
 //------------------------------------------------------------------------
-// Rôle de la classe <Xxx>
-//
-//
+// Classe qui implémente une liste chaînée de trajets
 //------------------------------------------------------------------------
 
 class ListeTrajet
@@ -30,52 +23,46 @@ class ListeTrajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void ajouterTrajet(const Trajet* const newT);
+    void AjouterTrajet(const Trajet* const newT);
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Ajoute un trajet au début de la liste
 
-    void ajouterTrajetFin(const Trajet* const newT);
+    void AjouterTrajetFin(const Trajet* const newT);
+    // Mode d'emploi :
+    // Ajoute un trajet à la fin de la liste
 
     void Affichage();
+    // Mode d'emploi :
+    // Affiche chaque trajet de la liste
 
     void EnleverFin();
-
-    Node* getHead() const;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Enlève le dernier trajet de la liste
 
-    int getTaille() const;
+    Node* GetHead() const;
+    // Mode d'emploi :
+    // Renvoie le premier noeud de la liste
+
+    int GetTaille() const;
+    // Mode d'emploi :
+    // Renvoie le nombre d'élements de la liste
 
 
 //-------------------------------------------- Constructeurs - destructeur
     ListeTrajet();
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
+    // Mode d'emploi :
+    // Construit une nouvelle liste vide
 
     ~ListeTrajet();
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Destruit la liste et tous le noeuds qui la composent
 
 //------------------------------------------------------------------ PRIVE
 private:
-    Node* head;
-    int taille;
-
-protected:
-//----------------------------------------------------- Méthodes protégées
-
-//----------------------------------------------------- Attributs protégés
+//----------------------------------------------------- Attributs privés
+    Node* head; // Premier élement de la liste
+    int taille; // Nombre d'élements de la liste
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Xxx>
-
-#endif // XXX_H
+#endif // LISTE_TRAJET_H

@@ -1,12 +1,11 @@
 /*************************************************************************
-                           Xxx  -  description
+                           TrajetSimple  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 25/11/2022
+    auteurs              : Miguel Pereira, Artur Pereira
 *************************************************************************/
 
-//---------- Réalisation de la classe <Xxx> (fichier Xxx.cpp) ------------
+//----- Réalisation de la classe <TrajetSimple> (fichier TrajetSimple.cpp) -----
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -14,8 +13,6 @@
 using namespace std;
 #include<cstring>
 #include <iostream>
-
-#include "Trajet.h"
 
 //------------------------------------------------------ Include personnel
 #include "TrajetSimple.h"
@@ -25,49 +22,30 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-char * TrajetSimple::getTransport() const{
+char * TrajetSimple::GetTransport() const{
     return transport;
-}
+} //----- Fin de GetTransport
 
 void TrajetSimple::Affichage() const{
     cout<<"De "<<depart<<" a "<<arrivee<<" en "<<transport<<"\n";
-}
-
-
-//------------------------------------------------- Surcharge d'opérateurs
-/*Xxx & Xxx::operator = ( const Xxx & unXxx )
-// Algorithme :
-//
-{
-} //----- Fin de operator =*/
+} //----- Fin de Affichage
 
 
 //-------------------------------------------- Constructeurs - destructeur
 
-
-TrajetSimple::TrajetSimple (const TrajetSimple& t) :
-TrajetSimple(t.getDepart(), t.getArrivee(), t.getTransport())
-// Algorithme :
-//
+TrajetSimple::TrajetSimple (const char* d, const char* a, const char* t)
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <TrajetSimple>" << endl;
+    cout << "Appel au constructeur de <TrajetSimple>" << endl;
 #endif
 
-} //----- Fin de TrajetSimple (constructeur de copie)
-
-TrajetSimple::TrajetSimple (const char* d, const char* a, const char* t) :
-Trajet(d, a)
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de TrajetSimple" << endl;
-#endif
-
+    depart = new char[strlen(d)+1];
+    arrivee = new char[strlen(a)+1];
     transport = new char[strlen(t)+1];
+    strcpy(depart, d);
+    strcpy(arrivee, a);
     strcpy(transport, t);
-} //----- Fin de TrajetSimple (constructeur)
+} //----- Fin de TrajetSimple
 
 TrajetSimple::~TrajetSimple()
 // Algorithme :
@@ -78,9 +56,4 @@ TrajetSimple::~TrajetSimple()
     cout << "Appel au destructeur de <TrajetSimple>" << endl;
 #endif
 } //----- Fin de ~TrajetSimple
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées
 

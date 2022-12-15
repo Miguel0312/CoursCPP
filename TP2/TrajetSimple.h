@@ -1,9 +1,8 @@
 /*************************************************************************
-                           Xxx  -  description
+                           TrajetSimple -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 25/11/2022
+    auteurs              : Miguel Pereira, Artur Pereira
 *************************************************************************/
 
 //---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
@@ -12,14 +11,11 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "Trajet.h"
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Xxx>
-//
-//
+// Sous-classe de Trajet qui implémente un trajet qui est completement
+// caracterisé par une ville de départ, une ville d'arrivée et un
+// moyen de transport
 //------------------------------------------------------------------------
 
 class TrajetSimple : public Trajet
@@ -29,38 +25,28 @@ class TrajetSimple : public Trajet
 public:
 //----------------------------------------------------- Méthodes publiques
   
-  char * getTransport() const;
-  
-  virtual void Affichage() const;
-  // Mode d'emploi :
-  //
-  // Contrat :
-  //
+char * GetTransport() const;
+
+virtual void Affichage() const;
+// Mode d'emploi :
+// Affiche la ville de depart, la ville d'arrivée et le moyen de transport
+// du trajet
 
 //-------------------------------------------- Constructeurs - destructeur
-  TrajetSimple(const TrajetSimple& t);
-  
-  TrajetSimple(const char* d, const char* a, const char* t);
-  // Mode d'emploi :
-  //
-  // Contrat :
-  //
-  
-  virtual ~TrajetSimple ( );
-  // Mode d'emploi :
-  //
-  // Contrat :
-  //
+TrajetSimple(const char* d, const char* a, const char* t);
+// Mode d'emploi :
+// Construit le TrajetSimple étant donnés les villes de départ et d'arrivée
+// ainsi que le moyen de transport
+
+virtual ~TrajetSimple ( );
+// Mode d'emploi :
+// Destructeur de TrajetSimple
 
 //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
-
 //----------------------------------------------------- Attributs protégés
   char* transport;
 };
 
-//-------------------------------- Autres définitions dépendantes de <Xxx>
-
-#endif // XXX_H
+#endif // TRAJET_SIMPLE_H

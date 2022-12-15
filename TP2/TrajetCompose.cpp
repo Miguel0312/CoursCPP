@@ -1,12 +1,11 @@
 /*************************************************************************
-                           Xxx  -  description
+                           TrajetCompose  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 25/11/2022
+    auteurs              : Miguel Pereira, Artur Pereira
 *************************************************************************/
 
-//---------- Réalisation de la classe <Xxx> (fichier Xxx.cpp) ------------
+//----- Réalisation de la classe <TrajetCompose> (fichier TrajetCompose.cpp) ---
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -20,84 +19,78 @@ using namespace std;
 #include "TrajetCompose.h"
 #include "TrajetSimple.h"
 
-//------------------------------------------------------------- Constantes
-
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
 void TrajetCompose::Affichage() const
 // Algorithme :
-//
+// Parcourt la liste de trajets qui composent ce traje composé
+// et affiche chaque trajet
 {
-    int nbTrajets = trajets.getTaille();
+    int nbTrajets = trajets.GetTaille();
     cout<<"Trajet compose avec "<<nbTrajets<<" trajets simples.\n";
-    Node* head = trajets.getHead();
+    Node* head = trajets.GetHead();
     while(head!=nullptr){
         cout << "   ";
-        head->getTrajet()->Affichage();
-        head = head->getNext();
+        head->GetTrajet()->Affichage();
+        head = head->GetNext();
     }
-} //----- Fin de Méthode
+} //----- Fin de Affichage
 
-bool TrajetCompose::AjouterTrajet(TrajetSimple& t){
-    
-    if(trajets.getHead() == nullptr){
-        char* tDepart = t.getDepart();
+bool TrajetCompose::AjouterTrajet(Trajet* t)
+// Algorithme :
+// Il assure que la ville de départ de la nouvelle ville est la même que la
+// ville d'arrivée du TrajetCompose actuel, pour que le trajet soit continu.
+// Si oui, il ajoute le trajet passé en argument à la fin du trajet actuel
+// et fait la mise à jour de la ville d'arrivée du trajet
+// Renvoie vrai si et seulement si le trajet a été ajouté 
+{
+    // Si le trajet est vide, on sauvegarde la ville de depart
+    if(trajets.GetHead() == nullptr){
+        const char* tDepart = t->GetDepart();
         depart = new char[strlen(tDepart)+1];
         strcpy(depart, tDepart);
     }
-    else if(strcmp(arrivee, t.getDepart())){
+    // Si la ville de depart de t n'est pas la même que la ville d'arrivee
+    // actuelle on renovie une erreur
+    else if(strcmp(arrivee, t->GetDepart())){
         cout<<"ERREUR: le depart du chemin simple actuel doit etre egal a l'arrive du anterieur\n";
         return false;
     }
     if(arrivee!=nullptr){
         delete[] arrivee;
     }
-    char* tArrivee = t.getArrivee();
+
+    char* tArrivee = t->GetArrivee();
     arrivee = new char[strlen(tArrivee)+1];
     strcpy(arrivee, tArrivee);
 
-    TrajetSimple* tCopy = new TrajetSimple(t);
-    trajets.ajouterTrajetFin(tCopy);
+    // Ajoute le trajet à la liste de trajets du TrajetCompose
+    trajets.AjouterTrajetFin(t);
     return true;
 }
 
 
-//------------------------------------------------- Surcharge d'opérateurs
-/*Xxx & Xxx::operator = ( const Xxx & unXxx )
-// Algorithme :
-//
-{
-} //----- Fin de operator =*/
-
-
 //-------------------------------------------- Constructeurs - destructeur
-TrajetCompose::TrajetCompose ()
-// Algorithme :
-//
+TrajetCompose::TrajetCompose() : trajets(ListeTrajet())
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetCompose>" << endl;
 #endif
-} //----- Fin de TrajetSimple
+} //----- Fin de TrajetCompose
 
 TrajetCompose::~TrajetCompose ( )
 // Algorithme :
-//
+// Parcourt toute la liste de trajets et destruit les trajets qui la composent
 {
 #ifdef MAP
     cout << "Appel au destructeur de <TrajetCompose>" << endl;
 #endif
 
-    Node* cur = trajets.getHead();
-    while(cur!=nullptr){
-        delete cur->getTrajet();
-        cur = cur->getNext();
+    Node* cur = trajets.GetHead();
+    while(cur != nullptr){
+        delete cur->GetTrajet();
+        cur = cur->GetNext();
     }
-} //----- Fin de ~Xxx
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées
+} //----- Fin de ~TrajetCompose
 

@@ -1,12 +1,11 @@
 /*************************************************************************
-                           Xxx  -  description
+                           Trajet  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 25/11/2022
+    auteurs              : Miguel Pereira, Artur Pereira
 *************************************************************************/
 
-//---------- Réalisation de la classe <Xxx> (fichier Xxx.cpp) ------------
+//---------- Réalisation de la classe <Trajet> (fichier Trajet.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -18,60 +17,36 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Trajet.h"
 
-//------------------------------------------------------------- Constantes
-
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void Trajet::Affichage() const
-//Algorithme :
-//
-{
-} //----- Fin de Méthode
 
-  char* Trajet::getDepart() const{
-    return depart;
-  }
+char* Trajet::GetDepart() const{
+  return depart;
+} //----- Fin de GetDepart
 
-  char* Trajet::getArrivee() const{
-    return arrivee;
-  }
-
-//------------------------------------------------- Surcharge d'opérateurs
+char* Trajet::GetArrivee() const{
+  return arrivee;
+} //----- Fin de GetArrivee
 
 
 //-------------------------------------------- Constructeurs - destructeur
 
 Trajet::Trajet():
-depart(nullptr), arrivee(nullptr){}
-
-Trajet::Trajet(const char* d, const char* a)
-// Algorithme :
-//
+depart(nullptr), arrivee(nullptr)
 {
-    depart = new char[strlen(d)+1];
-    arrivee = new char[strlen(a)+1];
-    strcpy(depart, d);
-    strcpy(arrivee, a);
 #ifdef MAP
-    cout << "Appel au constructeur de <Trajet>" << endl;
+  cout << "Appel au constructeur de <Trajet>" << endl;
 #endif
-} //----- Fin de Xxx
+} //----- Fin de Trajet
 
 
 Trajet::~Trajet()
-// Algorithme :
-//
 {
 #ifdef MAP
   cout << "Appel au destructeur de <Trajet>" << endl;
 #endif
     delete[] depart;
     delete[] arrivee;
-} //----- Fin de ~Xxx
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées
+} //----- Fin de ~Trajet
 

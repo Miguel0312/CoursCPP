@@ -1,12 +1,11 @@
 /*************************************************************************
-                           Xxx  -  description
+                           ListeTrajet  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 25/11/2022
+    auteurs              : Miguel Pereira, Artur Pereira
 *************************************************************************/
 
-//---------- Réalisation de la classe <Xxx> (fichier Xxx.cpp) ------------
+//---------- Réalisation de la classe <ListeTrajet> (fichier ListeTrajet.cpp) --
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -20,47 +19,63 @@ using namespace std;
 #include "Trajet.h"
 #include "ListeTrajet.h"
 
-//------------------------------------------------------------- Constantes
-
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void ListeTrajet::ajouterTrajet(const Trajet* const newT){
+void ListeTrajet::AjouterTrajet(const Trajet* const newT)
+// Algorithme:
+// Ajoute un nouveau élement au début de la liste et met ce nouveau élement
+// comme nouveau début de la liste
+{
+    // Met la taille de la liste à jour
     taille++;
     Node* newHead = new Node;
-    newHead->setTrajet(newT);
-    newHead->setNext(head);
+    newHead->SetTrajet(newT);
+    newHead->SetNext(head);
     head = newHead;
-}
+} //----- Fin de AjouterTrajet
 
-void ListeTrajet::ajouterTrajetFin(const Trajet* const newT){
+void ListeTrajet::AjouterTrajetFin(const Trajet* const newT)
+// Algorithme:
+// Parcourt toute la liste et ajoute un nouveau élement à la fin
+{
     taille++;
     Node* tail = new Node;
-    tail->setTrajet(newT);
-    tail->setNext(nullptr);
+    tail->SetTrajet(newT);
+    tail->SetNext(nullptr);
+    // Si la liste est vide, l'élement inseré est aussi le nouveau début
     if(head == nullptr){
         head = tail;
         return;
     }
     Node* cur = head;
-    while(cur->getNext()!=nullptr){
-        cur = cur->getNext(); 
+    // Parcourt la liste jusqu'à la fin
+    while(cur->GetNext()!=nullptr){
+        cur = cur->GetNext(); 
     }
-    cur->setNext(tail);
-}
+    cur->SetNext(tail);
+} //----- Fin de AjouterTrajetFin
 
 void ListeTrajet::Affichage(){
     Node* cur = head;
     while(cur != nullptr){
-        cur->getTrajet()->Affichage();
-        cur = cur->getNext();
+        cur->GetTrajet()->Affichage();
+        cur = cur->GetNext();
     }
-}
+} //----- Fin de Affichage
 
-void ListeTrajet::EnleverFin(){
+void ListeTrajet::EnleverFin()
+// Algorithme:
+// Parcourt la liste jusqu'à la fin et enlève le dernier élement de la liste
+// Fait aussi la mise à jour de l'élement suivant ce qui est maintenant le
+// dernier élement
+{
+    // Si la liste est vide, on ne fait rien
     if(head == nullptr)
         return;
-    if(head->getNext() == nullptr){
+    // Si la liste n'a qu'un élement, il faut affecter le début de la liste à
+    // un nullptr
+    if(head->GetNext() == nullptr){
         taille--;
         delete head;
         head = nullptr;
@@ -68,26 +83,32 @@ void ListeTrajet::EnleverFin(){
     }
 
     Node* tail = head;
-    while(tail->getNext()->getNext() != nullptr){
-        tail = tail->getNext();
+    // Parcourt la liste jusqu'à la find
+    while(tail->GetNext()->GetNext() != nullptr){
+        tail = tail->GetNext();
     }
 
-    delete tail->getNext();
-    tail->setNext(nullptr);
+    // Enlève le dernier élement
+    delete tail->GetNext();
+    tail->SetNext(nullptr);
     taille--;
-}
+} //----- Fin de EnleverFin
 
-Node* ListeTrajet::getHead() const{
+Node* ListeTrajet::GetHead() const{
     return head;
-}
+} //----- Fin de GetHead
 
-int ListeTrajet::getTaille() const{
+int ListeTrajet::GetTaille() const{
     return taille;
-}
+} //----- Fin de GetTaille
+
 //-------------------------------------------- Constructeurs - destructeur
 
 ListeTrajet::ListeTrajet() :
 head(nullptr), taille(0)
+// Algorithme :
+// Affecte le début de la liste à un nullptr et met la taille à 0, car il n'y a
+// pas d'élements
 {
 #ifdef MAP
     cout << "Appel au constructeur de ListeTrajet" << endl;
@@ -95,18 +116,15 @@ head(nullptr), taille(0)
 } //----- Fin de ListeTrajet
 
 ListeTrajet::~ListeTrajet()
+// Algorithme :
+// Parcourt la liste entière et delete les noeuds qui la composent
 {
 #ifdef MAP
     cout << "Appel au destructeur de <ListeTrajet>" << endl;
 #endif
     while(head!=nullptr){
         Node* n = head;
-        head = head->getNext();
+        head = head->GetNext();
         delete n;
     }
 } //----- Fin de ~ListeTrajet
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Méthodes protégées

@@ -30,10 +30,10 @@ void ajouterCheminSimple(Catalogue &c){
 }
 
 void ajouterCheminCompose(Catalogue &c){
+    char depart[BUF_SIZE], arrivee[BUF_SIZE], transport[BUF_SIZE];
     cout<<"Quelle est la taille du chemin?\n";
     int taille;
     cin>>taille;
-    char depart[BUF_SIZE], arrivee[BUF_SIZE], transport[BUF_SIZE];
     TrajetCompose* newTrajet = new TrajetCompose();
 
     for(int i =  0;i<taille;i++){
@@ -45,9 +45,10 @@ void ajouterCheminCompose(Catalogue &c){
         cout<<"Moyen de transport: ";
         cin>>transport;
         TrajetSimple* cur = new TrajetSimple(depart, arrivee, transport);
-        if(!newTrajet->AjouterTrajet(*cur))
+        if(!newTrajet->AjouterTrajet(cur)){
           i--;
-        delete cur;
+          delete cur;
+        }
     }
     c.AjouterTrajet(newTrajet);
 }
@@ -58,7 +59,7 @@ void rechercheSimple(const Catalogue &c){
     cin>>depart;
     cout<<"Ville d'arrivee: ";
     cin>>arrivee;
-    if(c.RechercheSimple(depart, arrivee)){
+    if(!c.RechercheSimple(depart, arrivee)){
       cout<<"Il n'y a aucun chemin direct possible entre "<< depart << " et " << arrivee << endl;
     }
 }
