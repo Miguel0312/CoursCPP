@@ -143,6 +143,22 @@ void Catalogue::SauvegarderType(ofstream& destin, char type) const{
     }
 }
 
+void Catalogue::SauvergarderVille(ofstream& destin, string depart, string arrivee) const{
+    Node* actuel = trajets.GetHead();
+    while(actuel != nullptr){
+        const Trajet* TrajetAnalyse = actuel->GetTrajet();
+        bool departCorrect = (depart.empty()) || 
+            strcmp(TrajetAnalyse->GetDepart(), depart.c_str());
+        bool arriveeCorrect = (arrivee.empty()) || 
+            strcmp(TrajetAnalyse->GetArrivee(), arrivee.c_str());
+        
+        if(departCorrect && arriveeCorrect){
+            actuel->GetTrajet()->Sauvegarder(destin);
+        }
+        actuel = actuel->GetNext();
+    }
+}
+
 void Catalogue::ChargerTous(const string& file){
     ifstream fis;
     fis.open(file);
@@ -165,6 +181,35 @@ void Catalogue::ChargerType(const string& file, char type){
             int nbTrajets = stoi(ligne.substr(index+1));
             for(int i = 0; i < nbTrajets; i++)
                 fis.ignore(string::npos, '\n');
+        }
+    }
+    fis.close();
+}
+
+void Catalogue::ChargerVille(string nomFichier, string depart, string arrivee){
+    ifstream fis;
+    fis.open(nomFichier);
+    string ligne;
+    while(getline(fis, ligne)){
+        int index = 1;
+        int fin = ligne.find(':', index + 1);
+        string departActuel = ligne.substr(index+1, fin - index + 1);
+        index = fin;
+        fin = ligne.find(':', index + 1);
+        string arriveeActuel = ligne.substr(index+1, fin - index + 1);
+        bool departCorrect = (depart.empty()) || 
+            (depart == departActuel);
+        bool arriveeCorrect = (arrivee.empty()) || 
+            (arrivee == arriveeActuel);
+        if(arriveeCorrect && departCorrect){
+            Chargement(fis, ligne);
+        }
+        else if(ligne[0] == 'C'){
+            int index = ligne.rfind(':');
+            int trajetsSimples = stoi(ligne.substr(index+1));
+            for(int i = 0; i<trajetsSimples;i++){
+                fis.ignore(std::string::npos,'\n');
+            }
         }
     }
     fis.close();

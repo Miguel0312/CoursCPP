@@ -54,6 +54,9 @@ public:
 
   void ChargerTous(const string& file);
   void ChargerType(const string& file, char type);
+  void Sauvegarder(ofstream& destin) const;
+  void SauvergarderVille(ofstream& destin, string depart, string arrivee) const;
+  void ChargerVille(string nomFichier, string depart, string arrivee);
 
 //-------------------------------------------- Constructeurs - destructeur
   Catalogue();
