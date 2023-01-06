@@ -122,12 +122,22 @@ void Catalogue::Affichage() const{
     }
 } //----- Fin de Affichage
 
-void Catalogue::Sauvegarder(ofstream& destin) const{
+void Catalogue::SauvegarderTous(ofstream& destin) const{
     Node* actuel = trajets.GetHead();
     while(actuel != nullptr){
         actuel->GetTrajet()->Sauvegarder(destin);
         actuel = actuel->GetNext();
     }
+}
+
+void Catalogue::ChargerTous(const string& file){
+    ifstream fis;
+    fis.open(file);
+    string ligne;
+    while(getline(fis, ligne)){
+        Chargement(fis, ligne);
+    }
+    fis.close();
 }
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -232,7 +242,7 @@ void Catalogue::Chargement(ifstream& origine, const string& description){
     }
 }
 
-TrajetSimple* Catalogue::ChargerTrajetSimple(const string& description){
+TrajetSimple* Catalogue::ChargerTrajetSimple(const string& description) const{
     // Sauvegarde les villes de depart, arrivee et le moyen de transport
     // Dans cet ordre
     string info[3];
@@ -242,7 +252,8 @@ TrajetSimple* Catalogue::ChargerTrajetSimple(const string& description){
         index = fin;
         fin = description.find(':', index+1);
     }
-    Trajet* nTrajet = new TrajetSimple(info[0].c_str(),
+    TrajetSimple* nTrajet = new TrajetSimple(info[0].c_str(),
                                        info[1].c_str(), 
                                        info[2].c_str());
+    return nTrajet;
 }

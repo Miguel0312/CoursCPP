@@ -1,4 +1,5 @@
 #include<iostream>
+#include<fstream>
 using namespace std;
 
 #include "Catalogue.h"
@@ -26,7 +27,6 @@ void ajouterCheminSimple(Catalogue &c){
     cin>>transport;
     TrajetSimple* cur = new TrajetSimple(depart, arrivee, transport);
     c.AjouterTrajet(cur);
-    
 }
 
 void ajouterCheminCompose(Catalogue &c){
@@ -101,6 +101,5 @@ int main(){
             continuer = false;
             break;
         }
-
     }
 }

@@ -12,6 +12,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include "ListeTrajet.h"
 #include "Trajet.h"
+#include "TrajetSimple.h"
 
 //------------------------------------------------------------------------
 // Classe qui implémente un catalogue contenant une liste de trajets et qui
@@ -48,7 +49,9 @@ public:
   // Affiche tous les trajets du catalogue dans l'ordre opposée à l'ordre
   // d'insertion
 
-  void Sauvegarder(ofstream& destin) const;
+  void SauvegarderTous(ofstream& destin) const;
+
+  void ChargerTous(const string& file);
 
 //-------------------------------------------- Constructeurs - destructeur
   Catalogue();
@@ -75,7 +78,7 @@ private:
 
   void Chargement(ifstream& origine, const string& description);
 
-  TrajetSimple* ChargerTrajetSimple(const string& description);
+  TrajetSimple* ChargerTrajetSimple(const string& description) const;
 
 //----------------------------------------------------- Attributs protégés
   ListeTrajet trajets;
