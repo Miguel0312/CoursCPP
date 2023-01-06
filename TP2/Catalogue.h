@@ -50,8 +50,10 @@ public:
   // d'insertion
 
   void SauvegarderTous(ofstream& destin) const;
+  void SauvegarderType(ofstream& destin, char type) const;
 
   void ChargerTous(const string& file);
+  void ChargerType(const string& file, char type);
 
 //-------------------------------------------- Constructeurs - destructeur
   Catalogue();

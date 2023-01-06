@@ -130,12 +130,42 @@ void Catalogue::SauvegarderTous(ofstream& destin) const{
     }
 }
 
+void Catalogue::SauvegarderType(ofstream& destin, char type) const{
+    Node* actuel = trajets.GetHead();
+    while(actuel != nullptr){
+        if(
+          (type == 'S' && typeid(actuel->GetTrajet()) == typeid(TrajetSimple))
+        ||(type == 'C' && typeid(actuel->GetTrajet()) == typeid(TrajetCompose))
+        ){
+            actuel->GetTrajet()->Sauvegarder(destin);
+        }
+        actuel = actuel->GetNext();
+    }
+}
+
 void Catalogue::ChargerTous(const string& file){
     ifstream fis;
     fis.open(file);
     string ligne;
     while(getline(fis, ligne)){
         Chargement(fis, ligne);
+    }
+    fis.close();
+}
+
+void Catalogue::ChargerType(const string& file, char type){
+    ifstream fis;
+    fis.open(file);
+    string ligne;
+    while(getline(fis, ligne)){
+        if(ligne[0] == type)
+            Chargement(fis, ligne);
+        else if(type == 'S'){
+            int index = ligne.rfind(':');
+            int nbTrajets = stoi(ligne.substr(index+1));
+            for(int i = 0; i < nbTrajets; i++)
+                fis.ignore(string::npos, '\n');
+        }
     }
     fis.close();
 }
@@ -253,7 +283,7 @@ TrajetSimple* Catalogue::ChargerTrajetSimple(const string& description) const{
         fin = description.find(':', index+1);
     }
     TrajetSimple* nTrajet = new TrajetSimple(info[0].c_str(),
-                                       info[1].c_str(), 
-                                       info[2].c_str());
+                                             info[1].c_str(), 
+                                             info[2].c_str());
     return nTrajet;
 }
