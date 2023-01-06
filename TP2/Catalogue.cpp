@@ -159,6 +159,19 @@ void Catalogue::SauvergarderVille(ofstream& destin, string depart, string arrive
     }
 }
 
+void Catalogue::SauvegarderIntervalle(ofstream& destin, int debut, int fin) const{
+    Node* actuel = trajets.GetHead();
+    int index = 1;
+    while(actuel != nullptr && index < debut){
+        index++;
+        actuel = actuel->GetNext();
+    }
+    while(actuel != nullptr && index <= fin){
+        actuel->GetTrajet()->Sauvegarder(destin);
+        actuel = actuel->GetNext();
+    }
+}
+
 void Catalogue::ChargerTous(const string& file){
     ifstream fis;
     fis.open(file);
@@ -186,7 +199,7 @@ void Catalogue::ChargerType(const string& file, char type){
     fis.close();
 }
 
-void Catalogue::ChargerVille(string nomFichier, string depart, string arrivee){
+void Catalogue::ChargerVille(const string& nomFichier, string depart, string arrivee){
     ifstream fis;
     fis.open(nomFichier);
     string ligne;
@@ -206,11 +219,34 @@ void Catalogue::ChargerVille(string nomFichier, string depart, string arrivee){
         }
         else if(ligne[0] == 'C'){
             int index = ligne.rfind(':');
-            int trajetsSimples = stoi(ligne.substr(index+1));
-            for(int i = 0; i<trajetsSimples;i++){
+            int nbTrajets = stoi(ligne.substr(index+1));
+            for(int i = 0; i<nbTrajets;i++){
                 fis.ignore(std::string::npos,'\n');
             }
         }
+    }
+    fis.close();
+}
+
+void Catalogue::ChargerIntervalle(const string& file, int debut, int fin){
+    ifstream fis;
+    fis.open(file);
+    string ligne;
+    int index = 1;
+    while(index < debut){
+        getline(fis, ligne);
+        if(ligne[0] == 'C'){
+            int index = ligne.rfind(':');
+            int nbTrajets = stoi(ligne.substr(index+1));
+            for(int i = 0; i<nbTrajets;i++){
+                fis.ignore(std::string::npos,'\n');
+            }
+        }
+        index++;
+    }
+    while(getline(fis, ligne) && index <= fin){
+        Chargement(fis, ligne);
+        index++;
     }
     fis.close();
 }

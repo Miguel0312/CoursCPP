@@ -51,12 +51,13 @@ public:
 
   void SauvegarderTous(ofstream& destin) const;
   void SauvegarderType(ofstream& destin, char type) const;
+  void SauvergarderVille(ofstream& destin, string depart, string arrivee) const;
+  void SauvegarderIntervalle(ofstream& destin, int debut, int fin) const;
 
   void ChargerTous(const string& file);
   void ChargerType(const string& file, char type);
-  void Sauvegarder(ofstream& destin) const;
-  void SauvergarderVille(ofstream& destin, string depart, string arrivee) const;
-  void ChargerVille(string nomFichier, string depart, string arrivee);
+  void ChargerVille(const string& file, string depart, string arrivee);
+  void ChargerIntervalle(const string& file, int debut, int fin);
 
 //-------------------------------------------- Constructeurs - destructeur
   Catalogue();
