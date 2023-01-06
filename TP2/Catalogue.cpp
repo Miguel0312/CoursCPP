@@ -12,19 +12,23 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <fstream>
 #include <cstring>
 
 //------------------------------------------------------ Include personnel
 #include "Catalogue.h"
 #include "Node.h"
 #include "ListeTrajet.h"
+#include "Trajet.h"
+#include "TrajetSimple.h"
+#include "TrajetCompose.h"
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
 void Catalogue::AjouterTrajet(const Trajet* t)
 {
-    trajets.AjouterTrajet(t);
+    trajets.AjouterTrajetFin(t);
 } //----- Fin de AjouterTrajet
 
 bool Catalogue::RechercheSimple(const char* depart, const char* arrivee) const
@@ -118,6 +122,14 @@ void Catalogue::Affichage() const{
     }
 } //----- Fin de Affichage
 
+void Catalogue::Sauvegarder(ofstream& destin) const{
+    Node* actuel = trajets.GetHead();
+    while(actuel != nullptr){
+        actuel->GetTrajet()->Sauvegarder(destin);
+        actuel = actuel->GetNext();
+    }
+}
+
 //-------------------------------------------- Constructeurs - destructeur
 Catalogue::Catalogue() :
 trajets(ListeTrajet())
@@ -200,3 +212,37 @@ bool Catalogue::dfs(const char* const depart,
 
     return resultat;
 } //----- Fin de dfs
+
+void Catalogue::Chargement(ifstream& origine, const string& description){
+    if(description[0] == 'S'){
+        Trajet* nTrajet = ChargerTrajetSimple(description);
+        AjouterTrajet(nTrajet);
+    } else if(description[0] == 'C'){
+        int index = description.rfind(':');
+        int nbTrajets = stoi(description.substr(index+1));
+        TrajetCompose* nTrajet = new TrajetCompose();
+        string ligne;
+        for(int i = 0; i < nbTrajets; i++){
+            getline(origine, ligne);
+            Trajet* sousTrajet = ChargerTrajetSimple(ligne);
+            nTrajet->AjouterTrajet(sousTrajet);
+        }
+
+        AjouterTrajet(nTrajet);
+    }
+}
+
+TrajetSimple* Catalogue::ChargerTrajetSimple(const string& description){
+    // Sauvegarde les villes de depart, arrivee et le moyen de transport
+    // Dans cet ordre
+    string info[3];
+    int index = 1, fin = description.find(':', index+1);
+    for(int i = 0; i < 3; i++){
+        info[i] = description.substr(index+1, fin-index-1);
+        index = fin;
+        fin = description.find(':', index+1);
+    }
+    Trajet* nTrajet = new TrajetSimple(info[0].c_str(),
+                                       info[1].c_str(), 
+                                       info[2].c_str());
+}

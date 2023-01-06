@@ -27,10 +27,12 @@ public:
   
 char * GetTransport() const;
 
-virtual void Affichage() const;
+virtual void Affichage() const override;
 // Mode d'emploi :
 // Affiche la ville de depart, la ville d'arrivée et le moyen de transport
 // du trajet
+
+virtual void Sauvegarder(ofstream& destin) const override;
 
 //-------------------------------------------- Constructeurs - destructeur
 TrajetSimple(const char* d, const char* a, const char* t);

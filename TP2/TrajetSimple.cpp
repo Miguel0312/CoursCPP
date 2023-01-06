@@ -13,6 +13,7 @@
 using namespace std;
 #include<cstring>
 #include <iostream>
+#include <fstream>
 
 //------------------------------------------------------ Include personnel
 #include "TrajetSimple.h"
@@ -29,6 +30,10 @@ char * TrajetSimple::GetTransport() const{
 void TrajetSimple::Affichage() const{
     cout<<"De "<<depart<<" a "<<arrivee<<" en "<<transport<<"\n";
 } //----- Fin de Affichage
+
+void TrajetSimple::Sauvegarder(ofstream& destin) const{
+    destin << "S:" << depart << ':' << arrivee << ':'<< transport << '\n';
+}
 
 
 //-------------------------------------------- Constructeurs - destructeur

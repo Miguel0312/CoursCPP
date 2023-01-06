@@ -38,6 +38,8 @@ public:
   // TrajetCompose actuel, ajoute t à la fin du trajet. Sinon, affiche une erreur
   // Renvoie vrai si et seulement si le trajet a été ajouté
 
+  virtual void Sauvegarder(ofstream& destin) const override;
+
 //-------------------------------------------- Constructeurs - destructeur
   TrajetCompose();
   // Mode d'emploi :

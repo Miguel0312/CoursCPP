@@ -7,16 +7,7 @@ Train
 Strasbourg
 Marseille
 Bus
-Bordeaux
-Lyon
-Voiture
 Marseille
-Lyon
-Voiture
-3
-Strasbourg
 Paris
-4
-Strasbourg
-Paris
+Avion
 5

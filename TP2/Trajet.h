@@ -37,6 +37,10 @@ public:
   // Mode d'emploi :
   // Renvoie le nom de la ville d'arrivée
 
+   virtual void Sauvegarder(ofstream& destin) const = 0;
+   // Mode d'emploi :
+  // Encode le trajet et l'écrive dans la stream destin
+
 //-------------------------------------------- Constructeurs - destructeur
   Trajet();
 

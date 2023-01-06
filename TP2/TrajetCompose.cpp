@@ -12,6 +12,7 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <fstream>
 #include<cstring>
 
 //------------------------------------------------------ Include personnel
@@ -68,6 +69,15 @@ bool TrajetCompose::AjouterTrajet(Trajet* t)
     // Ajoute le trajet à la liste de trajets du TrajetCompose
     trajets.AjouterTrajetFin(t);
     return true;
+}
+
+void TrajetCompose::Sauvegarder(ofstream& destin) const{
+    destin << "C:" << depart << ':' << arrivee << ':' << trajets.GetTaille() << '\n';
+    Node* actuel = trajets.GetHead();
+    while(actuel != nullptr){
+        actuel->GetTrajet()->Sauvegarder(destin);
+        actuel = actuel->GetNext();
+    }
 }
 
 

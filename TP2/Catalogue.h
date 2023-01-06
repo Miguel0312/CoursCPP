@@ -48,6 +48,8 @@ public:
   // Affiche tous les trajets du catalogue dans l'ordre opposée à l'ordre
   // d'insertion
 
+  void Sauvegarder(ofstream& destin) const;
+
 //-------------------------------------------- Constructeurs - destructeur
   Catalogue();
   // Mode d'emploi (constructeur de copie) :
@@ -70,6 +72,10 @@ private:
   // Fonction auxiliaire pour la méthode RechercheAvancée
   // Utilise une méthode récursive pour faire un depth first search entre les
   // villes de départ et d'arrivée
+
+  void Chargement(ifstream& origine, const string& description);
+
+  TrajetSimple* ChargerTrajetSimple(const string& description);
 
 //----------------------------------------------------- Attributs protégés
   ListeTrajet trajets;
