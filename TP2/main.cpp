@@ -18,19 +18,19 @@ void afficherMenu(){
 }
 
 void ajouterCheminSimple(Catalogue &c){
-    char depart[BUF_SIZE], arrivee[BUF_SIZE], transport[BUF_SIZE];
+    string depart, arrivee, transport;
     cout<<"Ville de depart: ";
-    cin>>depart;
+    getline(cin, depart);
     cout<<"Ville d'arrivee: ";
-    cin>>arrivee;
+    getline(cin, arrivee);
     cout<<"Moyen de transport: ";
-    cin>>transport;
-    TrajetSimple* cur = new TrajetSimple(depart, arrivee, transport);
+    getline(cin, transport);
+    TrajetSimple* cur = new TrajetSimple(depart.c_str(), arrivee.c_str(), transport.c_str());
     c.AjouterTrajet(cur);
 }
 
 void ajouterCheminCompose(Catalogue &c){
-    char depart[BUF_SIZE], arrivee[BUF_SIZE], transport[BUF_SIZE];
+    string depart, arrivee, transport;
     cout<<"Quelle est la taille du chemin?\n";
     int taille;
     cin>>taille;
@@ -39,12 +39,12 @@ void ajouterCheminCompose(Catalogue &c){
     for(int i =  0;i<taille;i++){
         cout<<"Informations pour le trajet "<<i+1<<"\n";
         cout<<"Ville de depart: ";
-        cin>>depart;
+        getline(cin, depart);
         cout<<"Ville d'arrivee: ";
-        cin>>arrivee;
+        getline(cin, arrivee);
         cout<<"Moyen de transport: ";
-        cin>>transport;
-        TrajetSimple* cur = new TrajetSimple(depart, arrivee, transport);
+        getline(cin, transport);
+        TrajetSimple* cur = new TrajetSimple(depart.c_str(), arrivee.c_str(), transport.c_str());
         if(!newTrajet->AjouterTrajet(cur)){
           i--;
           delete cur;
@@ -54,23 +54,23 @@ void ajouterCheminCompose(Catalogue &c){
 }
 
 void rechercheSimple(const Catalogue &c){
-    char depart[BUF_SIZE], arrivee[BUF_SIZE];
+    string depart, arrivee;
     cout<<"Ville de depart: ";
-    cin>>depart;
+    getline(cin, depart);
     cout<<"Ville d'arrivee: ";
-    cin>>arrivee;
-    if(!c.RechercheSimple(depart, arrivee)){
+    getline(cin, arrivee);
+    if(!c.RechercheSimple(depart.c_str(), arrivee.c_str())){
       cout<<"Il n'y a aucun chemin direct possible entre "<< depart << " et " << arrivee << endl;
     }
 }
 
 void rechercheAvancee(const Catalogue &c){
-    char depart[BUF_SIZE], arrivee[BUF_SIZE];
+    string depart, arrivee;
     cout<<"Ville de depart: ";
-    cin>>depart;
+    getline(cin, depart);
     cout<<"Ville d'arrivee: ";
-    cin>>arrivee;
-    if(!c.RechercheAvancee(depart, arrivee)){
+    getline(cin, arrivee);
+    if(!c.RechercheAvancee(depart.c_str(), arrivee.c_str())){
       cout<<"Il n'y a aucun chemin possible entre "<< depart << " et " << arrivee << endl;
     }
 }
