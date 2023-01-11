@@ -122,7 +122,9 @@ void Catalogue::Affichage() const{
     }
 } //----- Fin de Affichage
 
-void Catalogue::SauvegarderTous(ofstream& destin) const{
+void Catalogue::SauvegarderTous(const string& file) const{
+    ofstream destin;
+    destin.open(file);
     Node* actuel = trajets.GetHead();
     while(actuel != nullptr){
         actuel->GetTrajet()->Sauvegarder(destin);
@@ -130,7 +132,9 @@ void Catalogue::SauvegarderTous(ofstream& destin) const{
     }
 }
 
-void Catalogue::SauvegarderType(ofstream& destin, char type) const{
+void Catalogue::SauvegarderType(const string& file, char type) const{
+    ofstream destin;
+    destin.open(file);
     Node* actuel = trajets.GetHead();
     while(actuel != nullptr){
         if(
@@ -143,7 +147,9 @@ void Catalogue::SauvegarderType(ofstream& destin, char type) const{
     }
 }
 
-void Catalogue::SauvergarderVille(ofstream& destin, string depart, string arrivee) const{
+void Catalogue::SauvergarderVille(const string& file, string depart, string arrivee) const{
+    ofstream destin;
+    destin.open(file);
     Node* actuel = trajets.GetHead();
     while(actuel != nullptr){
         const Trajet* TrajetAnalyse = actuel->GetTrajet();
@@ -159,7 +165,9 @@ void Catalogue::SauvergarderVille(ofstream& destin, string depart, string arrive
     }
 }
 
-void Catalogue::SauvegarderIntervalle(ofstream& destin, int debut, int fin) const{
+void Catalogue::SauvegarderIntervalle(const string& file, int debut, int fin) const{
+    ofstream destin;
+    destin.open(file);
     Node* actuel = trajets.GetHead();
     int index = 1;
     while(actuel != nullptr && index < debut){

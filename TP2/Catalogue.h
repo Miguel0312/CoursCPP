@@ -49,10 +49,10 @@ public:
   // Affiche tous les trajets du catalogue dans l'ordre opposée à l'ordre
   // d'insertion
 
-  void SauvegarderTous(ofstream& destin) const;
-  void SauvegarderType(ofstream& destin, char type) const;
-  void SauvergarderVille(ofstream& destin, string depart, string arrivee) const;
-  void SauvegarderIntervalle(ofstream& destin, int debut, int fin) const;
+  void SauvegarderTous(const string& file) const;
+  void SauvegarderType(const string& file, char type) const;
+  void SauvergarderVille(const string& file, string depart, string arrivee) const;
+  void SauvegarderIntervalle(const string& file, int debut, int fin) const;
 
   void ChargerTous(const string& file);
   void ChargerType(const string& file, char type);

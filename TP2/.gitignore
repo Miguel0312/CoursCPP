@@ -1,0 +1,5 @@
+*.o
+trajet
+input.txt
+output.txt
+db.txt
