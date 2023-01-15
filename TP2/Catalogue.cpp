@@ -14,6 +14,7 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include<limits>
 
 //------------------------------------------------------ Include personnel
 #include "Catalogue.h"
@@ -138,8 +139,8 @@ void Catalogue::SauvegarderType(const string& file, char type) const{
     Node* actuel = trajets.GetHead();
     while(actuel != nullptr){
         if(
-          (type == 'S' && typeid(actuel->GetTrajet()) == typeid(TrajetSimple))
-        ||(type == 'C' && typeid(actuel->GetTrajet()) == typeid(TrajetCompose))
+          (type == 'S' && typeid(*(actuel->GetTrajet())) == typeid(TrajetSimple))
+        ||(type == 'C' && typeid(*(actuel->GetTrajet())) == typeid(TrajetCompose))
         ){
             actuel->GetTrajet()->Sauvegarder(destin);
         }
@@ -147,16 +148,16 @@ void Catalogue::SauvegarderType(const string& file, char type) const{
     }
 }
 
-void Catalogue::SauvergarderVille(const string& file, string depart, string arrivee) const{
+void Catalogue::SauvegarderVille(const string& file, string depart, string arrivee) const{
     ofstream destin;
     destin.open(file);
     Node* actuel = trajets.GetHead();
     while(actuel != nullptr){
         const Trajet* TrajetAnalyse = actuel->GetTrajet();
         bool departCorrect = (depart.empty()) || 
-            strcmp(TrajetAnalyse->GetDepart(), depart.c_str());
+            !strcmp(TrajetAnalyse->GetDepart(), depart.c_str());
         bool arriveeCorrect = (arrivee.empty()) || 
-            strcmp(TrajetAnalyse->GetArrivee(), arrivee.c_str());
+            !strcmp(TrajetAnalyse->GetArrivee(), arrivee.c_str());
         
         if(departCorrect && arriveeCorrect){
             actuel->GetTrajet()->Sauvegarder(destin);
@@ -175,6 +176,7 @@ void Catalogue::SauvegarderIntervalle(const string& file, int debut, int fin) co
         actuel = actuel->GetNext();
     }
     while(actuel != nullptr && index <= fin){
+      index++;
         actuel->GetTrajet()->Sauvegarder(destin);
         actuel = actuel->GetNext();
     }
@@ -197,11 +199,12 @@ void Catalogue::ChargerType(const string& file, char type){
     while(getline(fis, ligne)){
         if(ligne[0] == type)
             Chargement(fis, ligne);
-        else if(type == 'S'){
+        if(ligne[0] == 'C'){
             int index = ligne.rfind(':');
             int nbTrajets = stoi(ligne.substr(index+1));
-            for(int i = 0; i < nbTrajets; i++)
-                fis.ignore(string::npos, '\n');
+            for(int i = 0; i < nbTrajets; i++){
+                fis.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
         }
     }
     fis.close();
@@ -214,10 +217,10 @@ void Catalogue::ChargerVille(const string& nomFichier, string depart, string arr
     while(getline(fis, ligne)){
         int index = 1;
         int fin = ligne.find(':', index + 1);
-        string departActuel = ligne.substr(index+1, fin - index + 1);
+        string departActuel = ligne.substr(index+1, fin - index - 1);
         index = fin;
         fin = ligne.find(':', index + 1);
-        string arriveeActuel = ligne.substr(index+1, fin - index + 1);
+        string arriveeActuel = ligne.substr(index+1, fin - index - 1);
         bool departCorrect = (depart.empty()) || 
             (depart == departActuel);
         bool arriveeCorrect = (arrivee.empty()) || 
@@ -225,11 +228,11 @@ void Catalogue::ChargerVille(const string& nomFichier, string depart, string arr
         if(arriveeCorrect && departCorrect){
             Chargement(fis, ligne);
         }
-        else if(ligne[0] == 'C'){
+        if(ligne[0] == 'C'){
             int index = ligne.rfind(':');
             int nbTrajets = stoi(ligne.substr(index+1));
             for(int i = 0; i<nbTrajets;i++){
-                fis.ignore(std::string::npos,'\n');
+                fis.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
             }
         }
     }
@@ -247,7 +250,7 @@ void Catalogue::ChargerIntervalle(const string& file, int debut, int fin){
             int index = ligne.rfind(':');
             int nbTrajets = stoi(ligne.substr(index+1));
             for(int i = 0; i<nbTrajets;i++){
-                fis.ignore(std::string::npos,'\n');
+                fis.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
             }
         }
         index++;
