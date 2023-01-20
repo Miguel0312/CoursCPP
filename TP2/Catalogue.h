@@ -50,14 +50,50 @@ public:
   // d'insertion
 
   void SauvegarderTous(const string& file) const;
+  // Mode d'emploi:
+  // Sauvegarde tous les trajets du catalogue dans le fichier 'file'
+
   void SauvegarderType(const string& file, char type) const;
-  void SauvergarderVille(const string& file, string depart, string arrivee) const;
+  // Mode d'emploi:
+  // Sauvegarde tous les trajets du catalogue qui ont le meme type que 'type'
+  // dans le fichier 'file'. 'S' est pour trajet simple et 'C' pour compose.
+
+  void SauvegarderVille(const string& file, string depart, string arrivee) const;
+  // Mode d'emploi:
+  // Sauvegarde tous les trajets du catalogue qui ont la meme ville de depart et d'arrivee que
+  // 'depart' et 'arrive' dans le fichier file.
+  // Si 'depart' est la chaine vide, la fonction verifie seulement si la ville d'arrivee
+  // corresponde avec le parametre 'arrrivee'.
+  // Si 'arrivee' est la chaine vide, la fonction verifie seulement si la ville de depart
+  // corresponde avec le parametre 'depart'.
+
   void SauvegarderIntervalle(const string& file, int debut, int fin) const;
+  // Mode d'emploi:
+  // Sauvegarde tous les trajets du catalogue dans l'intervalle [debut, fin]
+  // dans le fichier file. L'ordre est 1-indexed.
 
   void ChargerTous(const string& file);
+  // Mode d'emploi:
+  // Charge tous les trajets du fichier 'file' dans le catalogue.
+
   void ChargerType(const string& file, char type);
+  // Mode d'emploi:
+  // Charge tous les trajets du fichier 'file'  meme type que 'type'
+  // dans le catalogue. 'S' est pour trajet simple et 'C' pour compose.
+
   void ChargerVille(const string& file, string depart, string arrivee);
+  // Mode d'emploi:
+  // Charge tous les trajets du fichier 'file' qui ont la meme ville de depart et d'arrivee que
+  // 'depart' et 'arrive' dans le catalogue.
+  // Si 'depart' est la chaine vide, la fonction verifie seulement si la ville d'arrivee
+  // corresponde avec le parametre 'arrrivee'.
+  // Si 'arrivee' est la chaine vide, la fonction verifie seulement si la ville de depart
+  // corresponde avec le parametre 'depart'.
+
   void ChargerIntervalle(const string& file, int debut, int fin);
+  // Mode d'emploi:
+  // Charge tous les trajets du fichier 'file' dans l'intervalle [debut, fin]
+  // dans le catalogue. L'ordre est 1-indexed.
 
 //-------------------------------------------- Constructeurs - destructeur
   Catalogue();
