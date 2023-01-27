@@ -5,7 +5,7 @@
 #include <map>
 #include <vector>
 
-#include "Log.h";
+#include "Log.h"
 
 using namespace std;
 
@@ -16,6 +16,7 @@ public:
   ~Statistic() {};
 
   void generateGraph(string graphFileName);
+  void displayCount();
 
 private:
   vector<Log> logs;

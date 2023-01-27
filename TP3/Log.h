@@ -18,6 +18,8 @@ public:
       unsigned int pSize,
       const string& pReferer,
       const string& pBrowser);
+
+  Log(const string& logString);
   
   virtual ~Log() {};
 
@@ -34,6 +36,8 @@ public:
   string getBrowser() { return browser; }
 
 private:
+  string urlLocal;
+
   string ip;
   string userLogname;
   string authenticatedUser;
