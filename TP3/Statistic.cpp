@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 #include <set>
 #include <vector>
 #include <fstream>
@@ -62,16 +63,9 @@ void Statistic::generateGraph(string graphFileName){
   gos << "}" << endl;
 }
 
-bool comp(const pair<string, int> &a, const pair<string,int> &b){
-  if(a.second !=b.second){
-    return a.second < b.second;
-  }
-  return a.first < b.first;
-}
-
 void Statistic::displayCount(){
   map<string, int> count;
-  for(int i = 0; i<logs.size();i++){
+  for(int i = 0; i<(int)logs.size();i++){
     string targetURL = logs[i].getTargetURL();
     auto targetLocation = count.find(targetURL);
     if(targetLocation != count.end()){
@@ -82,20 +76,20 @@ void Statistic::displayCount(){
     }
   }
 
-  set<pair<string,int>> order;
+  set<pair<int,string>> order;
   for(auto it = count.begin(); it!=count.end(); it++){
-    order.insert(make_pair(it->first,it->second));
-  }
-  sort(order.begin(), order.end(), comp);
-  size_t maxLines =10;
-  int lines = min(order.size(), maxLines);
-  auto it = count.begin();
-  advance(it, lines-1);
-  int maxCount = it->second;
-  advance(it,1);
-  while(it!=count.end() && it->second == maxCount){
-    lines++;
+    order.insert(make_pair(it->second,it->first));
   }
 
+  int maxLines = 10, lines = 0;
+  auto it = order.begin();
+  while(lines < maxLines && it != order.end()){
+    int cur = it->first;
+    while(it != order.end() && it->first == cur){
+      cout << it->second << " (" << it->first << " hits)" << endl;
+      lines++;
+      it++;
+    }
+  }
 }
 

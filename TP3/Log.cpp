@@ -3,6 +3,8 @@
 #include <string>
 #include <regex>
 #include<fstream>
+#include <iostream>
+#include<exception>
 
 using namespace std;
 
@@ -47,7 +49,7 @@ Log::Log(const string& pIp,
     string targetURLEx = "([^ ]*)";
     string protocolEx = "([^ ]*)";
     string statusEx = "([0-9]*)";
-    string sizeEx = "([0-9]*)";
+    string sizeEx = "([0-9]*|-)";
     string refererEx = "([^ ]*)";
     string browserEx = "([^\"]*)";
 
@@ -65,7 +67,11 @@ Log::Log(const string& pIp,
     targetURL = sm[6];
     protocol = sm[7];
     status = stoul(sm[8]);
-    size = stoul(sm[9]);
+    try{
+      size = stoul(sm[9]);
+    } catch(invalid_argument e){
+      size = 0;
+    }
     referer = sm[10];
     //Formate le urlLocal pour dans la forme d'une regex
     // Il faut escaper tous les '.' et '/'
