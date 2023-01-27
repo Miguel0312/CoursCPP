@@ -11,15 +11,8 @@
 
 using namespace std;
 
-Statistic::Statistic(string logFileName){
-  // TODO: parse file and generate logs
-  ifstream logFile;
-  logFile.open(logFileName);
-  string logActuel;
-  while(getline(logFile, logActuel)){
-    logs.emplace_back(logActuel);
-  }
-
+Statistic::Statistic(vector<Log> logVector):
+logs(logVector){
 }
 
 void Statistic::generateGraph(string graphFileName){

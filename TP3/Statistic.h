@@ -12,7 +12,7 @@ using namespace std;
 class Statistic{
 public:
 // TODO: pass the arguments relative to the command line options
-  Statistic(string logFileName);
+  Statistic(vector<Log> logVectors);
   ~Statistic() {};
 
   void generateGraph(string graphFileName);

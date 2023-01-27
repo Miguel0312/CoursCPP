@@ -54,8 +54,7 @@ Log::Log(const string& pIp,
     string browserEx = "([^\"]*)";
 
 
-    regex logEx(ipEx + " " + userLognameEx + " " + authenticatedUserEx + " \\[" + dateEx + "\\] \"" + methodEx + " " + targetURLEx + " " + protocolEx + "\" " + statusEx + " " + sizeEx+ " \"" + refererEx + "\" \"" + browserEx + "\"");
-
+    regex logEx(ipEx + "[ ]*" + userLognameEx + "[ ]*" + authenticatedUserEx + "[ ]*\\[" + dateEx + "\\][ ]*\"" + methodEx + "[ ]*" + targetURLEx + "[ ]*" + protocolEx + "\"[ ]*" + statusEx + "[ ]*" + sizeEx+ "[ ]*\"" + refererEx + "\"[ ]*\"" + browserEx + "\"");
     std::smatch sm;
     regex_search(logString, sm, logEx);
 
@@ -69,7 +68,7 @@ Log::Log(const string& pIp,
     status = stoul(sm[8]);
     try{
       size = stoul(sm[9]);
-    } catch(invalid_argument e){
+    } catch(invalid_argument& e){
       size = 0;
     }
     referer = sm[10];

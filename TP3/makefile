@@ -14,6 +14,7 @@ $(EXE) : $(OBJ)
 Log.o: Log.cpp Log.h
 Statistic.o: Statistic.cpp Statistic.h Log.h
 main.o : main.cpp Statistic.h
+LecteurLog.o: LecteurLog.cpp LecteurLog.h Log.h 
 
 $(OBJ) :
 	g++ -c $(CPPFLAGS) $<
