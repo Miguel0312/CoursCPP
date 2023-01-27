@@ -11,8 +11,8 @@
 
 using namespace std;
 
-Statistic::Statistic(vector<Log> logVector):
-logs(logVector){
+Statistic::Statistic(vector<Log> logVector, bool grapheF, string grapheFi):
+logs(logVector), grapheFlag(grapheF), grapheFile(grapheFi){
 }
 
 void Statistic::generateGraph(string graphFileName){
@@ -72,6 +72,9 @@ void Statistic::displayCount(){
     }
     else{
       count[targetURL] = 1;
+    }
+    if(grapheFlag){
+      generateGraph(grapheFile);
     }
   }
 

@@ -46,7 +46,7 @@ Log::Log(const string& pIp,
     string authenticatedUserEx = "(-)";
     string dateEx = "([a-zA-Z0-9\\/:]* [0-9\\+\\-]*)";
     string methodEx = "([A-Za-z]*)";
-    string targetURLEx = "([^ ]*)";
+    string targetURLEx = "(.*\\.[^ ]|.*\\/)";
     string protocolEx = "([^ ]*)";
     string statusEx = "([0-9]*)";
     string sizeEx = "([0-9]*|-)";
