@@ -56,6 +56,12 @@ void Statistic::generateGraph(string graphFileName){
   gos << "}" << endl;
 }
 
+bool comp(const pair<int, string>& a, const pair<int, string>& b){
+  if(a.first != b.first)
+    return a.first > b.first;
+  return a.second < b.second;
+}
+
 void Statistic::displayCount(){
   map<string, int> count;
   for(int i = 0; i<(int)logs.size();i++){
@@ -69,7 +75,7 @@ void Statistic::displayCount(){
     }
   }
 
-  set<pair<int,string>> order;
+  set<pair<int,string>, decltype(comp)*> order(comp);
   for(auto it = count.begin(); it!=count.end(); it++){
     order.insert(make_pair(it->second,it->first));
   }
