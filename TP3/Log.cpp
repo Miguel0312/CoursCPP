@@ -1,5 +1,14 @@
-#include "Log.h"
+/*************************************************************************
+  LecteurLog 
+  -------------------
+  début                : 20/01/2023
+ *************************************************************************/
 
+//---------- Réalisation de la classe <Log> (fichier Log.cpp) ------------
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
 #include <string>
 #include <regex>
 #include<fstream>
@@ -7,7 +16,11 @@
 #include<exception>
 
 using namespace std;
+//------------------------------------------------------ Include personnel
+#include "Log.h"
 
+//----------------------------------------------------------------- PUBLIC
+//-------------------------------------------- Constructeurs - destructeur
 Log::Log(const string& pIp,
     const string& pUserLogname,
     const string& pAuthenticatedUser,
@@ -33,8 +46,12 @@ Log::Log(const string& pIp,
     ifstream urlLocalFile;
     urlLocalFile.open("urlLocal.txt");
     getline(urlLocalFile, urlLocal);
-  }
+  }//------ Fin du constructeur parametrise
 
+// Algorithme :
+// Utilise des regex pour identifier chaque partie du log. 
+// L'expression final pour chercher est compose de ces parties et des 
+// caracteres separateurs, comme des espaces ou des accolades dependant du fragment
   Log::Log(const string& logString){ 
     ifstream urlLocalFile;
     urlLocalFile.open("urlLocal.txt");
@@ -94,4 +111,4 @@ Log::Log(const string& pIp,
 
     browser = sm[11];
 
-  }
+  } //---- Fin du constructeur a partir d'une string
