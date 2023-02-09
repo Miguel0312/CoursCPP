@@ -35,8 +35,7 @@ Log::Log(const string& pIp,
     getline(urlLocalFile, urlLocal);
   }
 
-  Log::Log(const string& logString){
-
+  Log::Log(const string& logString){ 
     ifstream urlLocalFile;
     urlLocalFile.open("urlLocal.txt");
     getline(urlLocalFile, urlLocal);
@@ -46,15 +45,15 @@ Log::Log(const string& pIp,
     string authenticatedUserEx = "(-)";
     string dateEx = "([a-zA-Z0-9\\/:]* [0-9\\+\\-]*)";
     string methodEx = "([A-Za-z]*)";
-    string targetURLEx = "(.*\\.[^ ]|.*\\/)";
-    string protocolEx = "([^ ]*)";
+    string targetURLEx = "(.*)";
+    string protocolEx = "(HTTP[^ ]*)";
     string statusEx = "([0-9]*)";
     string sizeEx = "([0-9]*|-)";
     string refererEx = "([^ ]*)";
     string browserEx = "([^\"]*)";
 
 
-    regex logEx(ipEx + "[ ]*" + userLognameEx + "[ ]*" + authenticatedUserEx + "[ ]*\\[" + dateEx + "\\][ ]*\"" + methodEx + "[ ]*" + targetURLEx + "[ ]*" + protocolEx + "\"[ ]*" + statusEx + "[ ]*" + sizeEx+ "[ ]*\"" + refererEx + "\"[ ]*\"" + browserEx + "\"");
+    regex logEx(ipEx + "[ ]+" + userLognameEx + "[ ]+" + authenticatedUserEx + "[ ]+\\[" + dateEx + "\\][ ]+\"" + methodEx + "[ ]+" + targetURLEx + "[ ]+" + protocolEx + "\"[ ]+" + statusEx + "[ ]+" + sizeEx+ "[ ]+\"" + refererEx + "\"[ ]+\"" + browserEx + "\"");
     std::smatch sm;
     regex_search(logString, sm, logEx);
 
@@ -77,7 +76,8 @@ Log::Log(const string& pIp,
     string formatedLocal = urlLocal;
     int indice = 0;
     string escapeStr = "\\";
-    while(indice<=formatedLocal.size()){
+    int sz = formatedLocal.size();
+    while(indice<=sz){
       if(formatedLocal[indice] == '/' || formatedLocal[indice] == '.'){
         formatedLocal.replace(indice,1,escapeStr + formatedLocal[indice]);
         indice++;

@@ -28,6 +28,7 @@ void Statistic::generateGraph(string graphFileName){
       idRef = posRef->second;
     else{
       nodes[log.getReferer()] = ++id;
+      idRef = id;
     }
 
     map<string, int>::iterator posTarget = nodes.find(log.getTargetURL());
@@ -35,6 +36,7 @@ void Statistic::generateGraph(string graphFileName){
       idTarget = posTarget->second;
     else{
       nodes[log.getTargetURL()] = ++id;
+      idTarget = id;
     }
 
     edges[{idRef, idTarget}]++;
@@ -73,9 +75,11 @@ void Statistic::displayCount(){
     else{
       count[targetURL] = 1;
     }
-    if(grapheFlag){
-      generateGraph(grapheFile);
-    }
+  }
+
+  if(grapheFlag){
+    cout << "Dot-file " << grapheFile << " generated" << endl;
+    generateGraph(grapheFile);
   }
 
   set<pair<int,string>, decltype(comp)*> order(comp);

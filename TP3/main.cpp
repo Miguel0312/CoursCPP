@@ -56,14 +56,28 @@ int main(int argc, char* argv[]){
       break;
     }
   }
-  if(i>=argc){
-    cerr<<"Nom du fichier log manquant.\n";
-    return 1;
+  if(!helpFlag){
+    if(i >= argc){
+      cerr<<"Nom du fichier log manquant.\n";
+      return 1;
+    }
+    fileName = argv[i];
   }
-  fileName = argv[i];
+
+  if(helpFlag){
+    cout << "Utilisation: ./analog [options] fichierDeLog" << endl;
+    cout << "-h: affiche ce texte" << endl;
+    cout << "-g nomfichier.dot: génére un fichier au format GraphViz"
+            "du graphe analysé" << endl;
+    cout << "-e: exclut tous les documents qui ont une extension d'image," 
+            " css ou js" << endl;
+    cout << "-t heure: ne prend en compte que les logs dans"
+            " [heure, heure+1[" << endl;
+    return 0;
+  }
 
 
-  LecteurLog lecteur(argv[1], imageFlag);
+  LecteurLog lecteur(fileName, imageFlag, heureFlag, heure);
   Statistic stat(lecteur.generateLogs(), grapheFlag, grapheFile);
   stat.displayCount();
   return 0;

@@ -16,20 +16,25 @@ vector<Log> LecteurLog::generateLogs(){
   vector<Log> listeLog;
   string logSrc;
   while(getline(inFile,logSrc)){
+    if(logSrc.empty())
+      continue;
     Log logRes(logSrc);
     bool isImg = false;
     bool heureValide = true;
     if(imageFlag){
       string targetURL = logRes.getTargetURL();
       //jpg, png, ico, gif, svg
-      string imgExtension[] = {".jpg", ".png", ".ico", ".gif", ".svg"};
-      string extension = targetURL.substr(targetURL.size()-5);
+      string imgExtension[] = {".jpg", ".png", ".ico", ".gif", ".svg", ".css"};
+      string extension = targetURL.substr(targetURL.size()-4);
       for(string ext : imgExtension){
         if(extension == ext){
           isImg = true;
           break;
         }
       }
+
+      if(!isImg && targetURL.substr(targetURL.size() - 3) == ".js")
+        isImg = true;
     }
 
     if(heureFlag){
