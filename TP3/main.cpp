@@ -1,3 +1,8 @@
+/*************************************************************************
+  Main function 
+  -------------------
+  début                : 20/01/2023
+ *************************************************************************/
 #include<iostream>
 #include <stdexcept>
 
@@ -20,6 +25,7 @@ int main(int argc, char* argv[]){
   int heure;
   string fileName = "";
   int i = 1;
+  //Detecte les drapeaux avec qui le programme a ete appele
   for(i = 1;i<argc;i++){
     string actuel(argv[i]);
     if(actuel == "-h"){
@@ -57,10 +63,12 @@ int main(int argc, char* argv[]){
     }
   }
   if(!helpFlag){
+    //Si on ne demande pas de l'aide, il faut donner le fichier
     if(i >= argc){
       cerr<<"Nom du fichier log manquant.\n";
       return 1;
     }
+    //Le nom du fichier est la premiere string qui ne correspond pas a un drapeaux
     fileName = argv[i];
   }
 

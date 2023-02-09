@@ -1,17 +1,26 @@
+/*************************************************************************
+  LecteurLog 
+  -------------------
+  début                : 20/01/2023
+ *************************************************************************/
+
+
+//---------- Réalisation de la classe <LecteurLog> (fichier LecteurLog.cpp) ------------
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
 #include<fstream>
 #include<string>
 #include<vector>
 #include<iostream>
-
-#include "LecteurLog.h"
-
 using namespace std;
 
-LecteurLog::LecteurLog(const string& filePath, bool imageF, bool heureF, int heureD):
-  imageFlag(imageF), heureFlag(heureF), heure(heureD){
-    inFile.open(filePath);
-  }
+//------------------------------------------------------ Include personnel
+#include "LecteurLog.h"
 
+//----------------------------------------------------------------- PUBLIC
+//----------------------------------------------------- Méthodes publiques
 vector<Log> LecteurLog::generateLogs(){
   vector<Log> listeLog;
   string logSrc;
@@ -50,6 +59,16 @@ vector<Log> LecteurLog::generateLogs(){
     }
   }
 
+
+  //Retourne le descripteur au debut du fichier
   inFile.seekg(0);
   return listeLog;
-}
+} //----- Fin de generateLogs
+
+//-------------------------------------------- Constructeurs - destructeur
+LecteurLog::LecteurLog(const string& filePath, bool imageF, bool heureF, int heureD):
+  imageFlag(imageF), heureFlag(heureF), heure(heureD){
+    inFile.open(filePath);
+} //----- Fin du constructeur
+
+
