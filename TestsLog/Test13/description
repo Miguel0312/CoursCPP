@@ -1,0 +1,1 @@
+Lorsqu'on éxecute le programme avec les flag -t et -g, il ne prend'en compte que les requêtes faites entre [heure,heure+1[ et produit un fichier format GraphViz

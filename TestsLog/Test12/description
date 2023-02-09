@@ -1,0 +1,2 @@
+Lorsqu'on éxecute le programme avec les flag -e et g, il exclut les fichiers avec
+extension d'image, css ou js et produit un fichier format GraphViz

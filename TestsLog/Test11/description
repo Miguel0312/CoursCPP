@@ -1,0 +1,2 @@
+Lorsqu'on éxecute le programme avec les flag -e et -t, il exclut les fichiers avec
+extension d'image, css ou js et ne prend que ceux dont la requête a été faite entre [heure, heure+1[

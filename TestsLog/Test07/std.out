@@ -1,0 +1,5 @@
+Utilisation: ./analog [options] fichierDeLog
+-h: affiche ce texte
+-g nomfichier.dot: génére un fichier au format GraphViz du graphe analysé
+-e: exclut tous les documents qui ont une extension d'image, css ou js
+-t heure: ne prend en compte que les logs dans [heure, heure+1[
